@@ -1,0 +1,55 @@
+/* Small screens keep the porcelain editorial mood while prioritizing one-handed cooking. */
+@media (max-width:700px){
+  body{font-size:16px;line-height:1.65}
+  .site-header{min-height:72px;padding:13px 5% 0!important}
+  .site-menu-toggle{width:48px;height:48px}
+  .workspace-page{padding:98px 5% calc(44px + env(safe-area-inset-bottom))!important}
+  #ingredients .page-intro h1,#plan .page-intro h1,#shopping .page-intro h1{max-width:9em;font-size:clamp(34px,10vw,42px);line-height:1.16;letter-spacing:-.06em}
+  #ingredients .page-intro>p,#plan .page-intro>p,#shopping .page-intro>p{max-width:25em;font-size:13px;line-height:1.8}
+  .workspace-page .workflow{min-height:44px;margin:26px 0 30px}
+  .workspace-page .workflow a{font-size:10px}
+  .workspace-page .workflow span{width:24px;height:24px;font-size:10px}
+  .quick button,.ingredient-form .button,.people-card>.button{min-height:48px}
+  .quick button{padding-block:12px}
+  .ingredient-form{gap:10px}
+  .ingredient-form input,.ingredient-form select{min-height:46px}
+  .kitchen-card summary{min-height:44px}
+  .kitchen-tools{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .kitchen-tools span{min-height:42px;padding:11px 5px;font-size:11px}
+  #plan .recipe-controls{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+  #plan .recipe-controls>div{display:block;min-width:0}
+  #plan .filter-label{display:block;margin-bottom:9px}
+  #plan .recipe-categories{width:calc(100% + 2px);flex-wrap:nowrap;overflow-x:auto;padding:0 2px 6px;scroll-snap-type:x proximity;scrollbar-width:none}
+  #plan .recipe-categories::-webkit-scrollbar{display:none}
+  #plan .recipe-categories button{flex:none;min-height:42px;scroll-snap-align:start}
+  #plan .kitchen-link{align-self:flex-start;padding:5px 0;font-size:12px}
+  #plan .plan-toolbar{gap:16px}
+  #plan .toolbar-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  #plan .toolbar-actions .button{width:100%;min-height:46px;padding:10px 8px}
+  .social-toolbar{align-items:stretch;flex-direction:column;gap:14px}
+  .social-toolbar>div{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto}
+  .social-toolbar select,.social-toolbar .button{min-height:44px}
+  .community-card{border-radius:0}
+  .post-content{padding:17px}
+  .post-title{font-size:25px;line-height:1.2}
+  .post-actions{justify-content:space-between;gap:10px}
+  .post-actions button{min-height:32px}
+  .creator-sidebar{gap:14px}
+  .account-layout{padding-bottom:20px}
+  .account-story h1{font-size:clamp(38px,11vw,47px)}
+  .profile-summary{padding-block:20px}
+  .auth-tabs{gap:20px;overflow-x:auto;white-space:nowrap}
+  .auth-tabs button{min-height:42px}
+  .stacked-form input,.stacked-form textarea,.stacked-form select{min-height:46px;font-size:16px}
+  .social-dialog{width:100%;max-width:none;max-height:100dvh;min-height:min(560px,100dvh);margin:0;border-radius:18px 18px 0 0;padding:26px 20px calc(24px + env(safe-area-inset-bottom))}
+  .social-dialog::backdrop{background:#07274b9c}
+  footer{padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}
+}
+
+@media (max-width:380px){
+  .workspace-page .workflow a{font-size:9px}
+  .workspace-page .workflow i{width:8px}
+  .quick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #plan .toolbar-actions{grid-template-columns:1fr}
+  .profile-summary{gap:12px}
+}

@@ -1,0 +1,134 @@
+/* Phone-first application frame; existing cooking and recipe components retained. */
+.taste-preferences{margin:16px 0;padding:0 16px;background:#f8fbfd;border:1px solid #cbdce7;border-radius:18px;color:#234b69}
+.taste-preferences summary{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-size:15px;font-weight:600}
+.taste-preferences summary span{font-size:11px;color:#526c7e;font-weight:400}
+.taste-setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 0}
+.taste-setting-grid label{font-size:13px;min-width:0;color:#234b69}
+.taste-setting-grid select{display:block;width:100%;min-height:46px;font-size:16px;margin-top:6px;padding:8px;border:1px solid #adc5d6;border-radius:10px;background:white;color:#234b69}
+.taste-preferences p{font-size:12px;line-height:1.7;color:#526c7e;margin:8px 0 16px}
+.taste-result-note{padding:14px 16px;border-radius:14px;background:#e4eef5;color:#234b69;font-size:13px;line-height:1.7}
+.taste-match-badge{align-self:flex-start;width:fit-content;border-radius:8px;padding:4px 8px;background:#dceee6;color:#23543f;font-size:11px;font-weight:600}
+.app-shell.app-welcome{padding-bottom:0}
+.app-welcome .app-tabbar{display:none}
+.welcome-shortcut{position:absolute;top:78px;right:20px;z-index:10;min-height:44px;padding:10px 16px;border:1px solid #c6d8e5;border-radius:24px;background:#f8fcfff2;color:#234b69;font:inherit;font-size:13px;cursor:pointer}
+.welcome-login{max-width:520px;margin:0 auto;padding:48px 20px calc(40px + env(safe-area-inset-bottom,0px));scroll-margin-top:70px;color:#234b69}
+.welcome-login>h2{font-size:28px;line-height:1.45;letter-spacing:-.03em;margin:12px 0}
+.welcome-login>p{font-size:14px;line-height:1.9;color:#526c7e;margin-bottom:24px}
+.welcome-login .auth-panel{padding:24px 20px;border:1px solid #d5e3ec;border-radius:24px;background:#fff;box-shadow:0 12px 35px #234b6909}
+.welcome-login .auth-panel h2{font-size:22px;line-height:1.4}
+.welcome-login .auth-tabs{display:flex;flex-wrap:wrap;gap:12px}
+.welcome-login input{font-size:16px;min-height:48px;box-sizing:border-box;max-width:100%}
+.welcome-login .fine-print{font-size:12px;line-height:1.8;color:#526c7e}
+.app-welcome #home .journey-stage{height:100svh}
+.app-welcome #home .journey-intro{top:max(145px,20svh)}
+.app-shell #ingredients .fridge-heading{margin-bottom:12px}
+.app-shell #ingredients .fridge-heading h2{font-size:18px}
+.app-shell #ingredients .fridge-primary,.app-shell .fridge-customize>summary{border-radius:14px}
+@media(max-width:700px){.app-shell #ingredients .fridge-stage{width:min(72%,calc(230px * var(--fridge-size,1)));margin:12px auto 20px}.app-shell #ingredients .fridge-heading p{font-size:12px}.app-shell #ingredients .fridge-entry{margin-bottom:20px}.app-welcome .kitchen-entry{padding:36px 20px}.app-welcome .kitchen-entry h2{font-size:28px}}
+:root{--app-bar-height:76px;--app-safe:env(safe-area-inset-bottom,0px)}
+body.app-shell{padding-bottom:calc(var(--app-bar-height) + var(--app-safe));background:#edf3f7}
+.app-shell>footer,.app-shell .site-menu-toggle{display:none!important}
+.app-shell .site-header{position:fixed!important;top:0;left:0;right:0;z-index:45;height:60px;min-height:60px;padding:8px 20px!important;box-sizing:border-box;background:#f6faffed;backdrop-filter:blur(18px);border-bottom:1px solid #dce7ec;display:flex;align-items:center;justify-content:space-between}
+.app-shell .site-header .brand{font-size:21px}.app-shell .brand-en{display:none}.app-header-title{font-size:13px;font-weight:600;color:#526c7e;letter-spacing:.06em}.app-back{font-size:34px;line-height:1;width:40px;min-height:44px;display:grid;place-items:center;color:#234b69;text-decoration:none}.app-back[hidden]{display:none}.app-shell:has(.app-back:not([hidden])) .site-header .brand{margin-right:auto;margin-left:6px}
+.app-tabbar{position:fixed;z-index:70;bottom:0;left:0;right:0;height:calc(var(--app-bar-height) + var(--app-safe));padding:8px 8px calc(6px + var(--app-safe));box-sizing:border-box;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:#fbfdfff5;border-top:1px solid #d4e1e9;box-shadow:0 -5px 24px #2449630a;backdrop-filter:blur(22px)}
+.app-tabbar a{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;font-size:11px;font-weight:600;color:#687d8b;min-height:52px;border-radius:14px;-webkit-tap-highlight-color:transparent}
+.app-tabbar a.selected{color:#174d73}.app-tab-icon{height:27px;display:grid;place-items:center}.app-tab-icon svg{width:24px;height:24px}.app-tabbar a.selected:not(.app-ai-tab) .app-tab-icon{background:#e0edf5;border-radius:9px;width:42px}
+.app-tabbar .app-ai-tab .app-tab-icon{width:48px;height:38px;margin-top:-11px;border-radius:14px;background:#214f70;color:#fff;box-shadow:0 4px 12px #214f7030}.app-tabbar .app-ai-tab.selected .app-tab-icon{background:#336c8d;outline:3px solid #dbe9f2}
+.app-shell .workspace-page{padding:84px 18px 32px!important;min-height:calc(100dvh - var(--app-bar-height) - var(--app-safe));box-sizing:border-box}
+.app-shell .page-intro h1{font-size:28px!important;line-height:1.25!important;letter-spacing:-.035em!important;max-width:none!important}.app-shell .page-intro>p{font-size:13px!important;line-height:1.7!important;margin:10px 0}
+.app-shell .workflow{margin:18px 0!important}.app-shell .workflow a{font-size:12px!important}.app-shell .page-intro{max-width:none!important}
+.app-shell .plan-photo-pair{display:none!important}.app-shell .toast{bottom:calc(94px + var(--app-safe));max-width:calc(100vw - 40px)}
+.app-shell> .scroll-to-top{bottom:calc(92px + var(--app-safe));right:16px;width:44px;height:44px;min-height:44px}
+.app-shell #meal-diary{scroll-margin-top:78px}.app-shell .app-keyboard-open .app-tabbar,.app-keyboard-open .app-tabbar{display:none}
+.app-home-shortcuts{position:absolute;z-index:8;top:76px;left:18px;right:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.app-home-shortcuts a{display:flex;flex-direction:column;gap:3px;padding:13px 15px;border:1px solid #ffffffd9;border-radius:16px;background:#f9fcffb8;backdrop-filter:blur(12px);text-decoration:none;color:#244b65;box-shadow:0 6px 18px #20496b09}.app-home-shortcuts span{font-size:15px;font-weight:650}.app-home-shortcuts small{font-size:11px;color:#537087}
+.app-shell #home{position:relative}.app-shell .journey-stage{height:calc(100svh - var(--app-bar-height) - var(--app-safe))}.app-shell .journey-intro{top:max(170px,22svh)}
+.app-shell .meal-journey.is-enhanced{height:300svh}.app-shell .meal-journey.is-enhanced.is-reduced{height:160svh}
+.app-shell #account{background:linear-gradient(160deg,#e3eef5,#f6f9fb 48%)}.app-profile-card{display:flex;align-items:center;gap:17px;padding:24px 4px 22px}.app-avatar{width:66px;height:66px;border-radius:23px;background:#d1e3ef;color:#315d79;display:grid;place-items:center;flex-shrink:0}.app-avatar svg{width:31px;height:31px}.app-profile-card h1{font-size:27px;line-height:1.3;margin:7px 0;color:#1f4059}.app-profile-card p{font-size:12px;line-height:1.6;color:#547085;margin:0;overflow-wrap:anywhere}.app-kicker{font-size:10px;letter-spacing:.15em;font-weight:700;color:#52758b}
+.app-personal-stats{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1px solid #dfe8ee;border-radius:20px;padding:20px 4px;margin-bottom:22px}.app-personal-stats>div{display:flex;flex-direction:column;align-items:center;gap:4px}.app-personal-stats>div+div{border-left:1px solid #e2eaf0}.app-personal-stats strong{font-size:25px;color:#234e6b}.app-personal-stats span{font-size:12px;color:#617685}
+.app-personal-links{background:#fff;border:1px solid #dfe8ee;border-radius:20px;padding:0 17px}.app-personal-links a,.app-personal-links button{width:100%;display:flex;justify-content:space-between;align-items:center;padding:17px 0;min-height:70px;border:0;background:none;text-align:left;text-decoration:none;color:#29485e;font:inherit;font-size:15px;cursor:pointer}.app-personal-links>*+*{border-top:1px solid #e8eef2}.app-personal-links small{display:block;font-size:12px;color:#6a7f8d;margin-top:4px}.app-personal-links b{font-size:23px;font-weight:400;color:#7c94a3}
+.app-account-details{margin-top:20px;border:1px solid #dfe8ee;border-radius:20px;background:#fff;padding:0 16px}.app-account-details>summary{display:flex;align-items:center;justify-content:space-between;min-height:64px;font-size:15px;color:#29485e;cursor:pointer}.app-account-details>summary span{font-size:12px;color:#617d90}.app-shell .account-story{display:none}.app-shell .account-layout{display:block!important;margin:0!important;gap:0;padding:0 0 16px!important}.app-shell .account-layout .surface{padding:18px 0;border:0;box-shadow:none;background:none}.app-local-note{font-size:12px;line-height:1.8;color:#637886;padding:2px 12px}.app-shell #account .profile-summary{flex-wrap:wrap}.app-shell #account .auth-tabs{gap:16px}
+.app-shell #ai{text-align:center;background:radial-gradient(ellipse at 50% 20%,#d9e8f3,transparent 60%),#f7fafc;padding-top:112px!important}.ai-orbit{width:88px;height:88px;margin:0 auto 25px;display:grid;place-items:center;border-radius:30px;background:linear-gradient(145deg,#285d7c,#173e5c);box-shadow:0 15px 35px #2f63872b;color:#fff}.ai-orbit svg{width:42px;height:42px}.app-ai-page h1{font-size:34px;line-height:1.4;color:#234b67;margin:16px 0}.app-ai-page>p{font-size:14px;line-height:1.85;color:#5d7586}.app-status-pill{display:inline-block;font-size:11px;background:#e6edf2;color:#557082;border-radius:20px;padding:6px 12px}.ai-question-preview{margin:28px auto;max-width:360px;padding:20px;text-align:left;background:#ffffffd9;border:1px solid #dce6ed;border-radius:20px;color:#33556c}.ai-question-preview>span{font-size:11px;color:#718592}.ai-question-preview p{font-size:14px;padding:12px 0;margin:0}.ai-question-preview p+p{border-top:1px solid #e9eff3}
+@media(max-width:700px){.app-shell .community-hero{padding-top:0!important}.app-shell .community-hero h1{font-size:30px!important}.app-shell .community-hero>div:first-child{border-radius:20px;padding:22px!important}.app-shell .community-layout{display:block}.app-shell .community-card{border-radius:20px;overflow:hidden}.app-shell .creator-sidebar{margin-top:20px}.app-shell .journey-controls{bottom:22px}.app-shell .kitchen-entry{padding:50px 20px}.app-shell .kitchen-entry h2{font-size:32px}.app-shell .recipe-library-heading h2{font-size:24px}}
+@media(min-width:701px){.app-tabbar{left:50%;transform:translateX(-50%);width:min(560px,100%);border-radius:22px 22px 0 0}.app-shell #account,.app-shell #ai{max-width:620px;margin:auto}.app-home-shortcuts{max-width:500px;left:50%;right:auto;width:calc(100% - 36px);transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.app-shell *{scroll-behavior:auto!important}}
+ .app-shell .site-header .brand,.app-shell .site-header .brand>span{color:#234b69!important;text-shadow:none!important}
+/* Fridge daily-use view: one heading, one primary action, optional decoration. */
+.app-shell #ingredients .fridge-entry[data-mode=closed] .fridge-heading{display:none}
+.app-shell #ingredients .fridge-stock-summary{margin:0 0 12px;font-size:14px;line-height:1.6;color:#405767}
+.app-shell #ingredients .fridge-entry #fridge-direct-open{width:100%;min-height:50px;font-size:16px;font-weight:600;margin:12px 0 0}
+.app-shell #ingredients .fridge-customize>summary{font-size:14px;min-height:48px;box-sizing:border-box;background:transparent;border-color:#bdc8ce;color:#405767}
+.app-shell #ingredients .fridge-scale{justify-content:space-between;min-height:48px;margin-bottom:16px;font-size:14px}
+@media(max-width:700px){
+ .app-shell #ingredients:has(.fridge-entry[data-mode=closed])>.page-intro{padding-bottom:0;margin-bottom:12px}
+ .app-shell #ingredients:has(.fridge-entry[data-mode=closed])>.page-intro h1{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:28px!important;font-weight:650;letter-spacing:0!important;margin:0}
+ .app-shell #ingredients .fridge-entry[data-mode=closed]{padding:0;margin:0}
+ .app-shell #ingredients .fridge-entry[data-mode=closed] .fridge-stage{width:min(64%,calc(210px * var(--fridge-size,1)));margin:18px auto 28px}
+ .app-shell #ingredients .fridge-layout{gap:16px}
+ .app-shell #ingredients .fridge-customize{margin-top:0}
+}
+/* Meal selection: compact overview first, full recipe cards on demand. */
+.app-shell #plan{background:#f1f5f7}
+.app-shell #plan:before{background:#f1f5f7}
+.app-shell #plan .page-intro .eyebrow{display:none}
+.app-shell #plan .page-intro h1{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-weight:650;color:#18334d;text-shadow:none}
+.app-shell #plan #selected-meal-plan{margin:14px 0 20px;padding:16px;border-color:#d4e0e7;box-shadow:none}
+.app-shell #plan #selected-meal-plan .meal-plan-heading{padding:0}
+.app-shell #plan #selected-meal-plan .meal-plan-heading h2{font:650 19px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:0 0 6px;color:#18334d}
+.app-shell #plan #selected-meal-plan .meal-plan-heading p{font-size:12px;margin:0;color:#526575}
+.app-shell #plan #selected-meal-plan .plan-toolbar{display:block;padding:10px 0}
+.app-shell #plan #selected-meal-plan .plan-toolbar strong{font-size:12px;line-height:1.7;font-weight:400;color:#526575}
+.app-shell #plan #selected-meal-plan .toolbar-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.app-shell #plan #selected-meal-plan .toolbar-actions .button{font-size:12px;padding:8px 10px;min-height:44px;border-radius:10px;gap:4px}
+.app-shell #plan #selected-meal-plan .fridge-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 0;margin:0}
+.app-shell #plan #start-meal{grid-column:1/-1;min-height:50px;background:#214f70;color:#fff;border-radius:12px;font-size:16px;font-weight:600}
+.app-shell #plan #finish-meal,.app-shell #plan #view-diary{font-size:12px;min-height:44px;border:0;padding:8px;color:#405b6d;background:#eef3f6;border-radius:10px;gap:0}
+.plan-menu-preview{display:flex;flex-direction:column;gap:0;margin-top:4px}
+.plan-menu-preview button{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:48px;width:100%;padding:10px 0;border:0;border-top:1px solid #e3eaee;background:transparent;text-align:left;color:#18334d;font:inherit}
+.plan-menu-preview small{font-size:12px;white-space:nowrap;color:#526575}
+.plan-menu-preview p{font-size:13px;color:#526575;margin:8px 0}
+.plan-menu-details{margin-top:8px;border-top:1px solid #e3eaee}
+.plan-menu-details>summary{min-height:44px;padding:12px 0;color:#405b6d;cursor:pointer;font-size:13px}
+.app-shell #plan .recipe-library-heading{padding:0;background:transparent;border:0;box-shadow:none;margin:20px 0 12px}
+.app-shell #plan .recipe-library-heading .eyebrow{display:none}
+.app-shell #plan .recipe-library-heading h2{font:650 21px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:0;color:#18334d}
+.app-shell #plan .recipe-library-heading p{font-size:13px;color:#526575}
+.app-shell #plan .recipe-controls{padding:16px;border-radius:16px;border:1px solid #d4e0e7;box-shadow:none;background:#fff;backdrop-filter:none}
+.app-shell #plan .recipe-controls .filter-label{font-size:13px;color:#526575}
+.app-shell #plan .recipe-controls .kitchen-link{font-size:12px;color:#405b6d}
+.app-shell #plan #purchase-panel{padding:0 16px;border-color:#d4e0e7;margin:16px 0}
+.app-shell #plan .library-copy strong{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-size:20px;line-height:1.4;color:#18334d}
+.app-shell #plan .library-copy>span,.app-shell #plan .library-copy em{font-size:13px;line-height:1.7;color:#526575}
+.app-shell #recipe-dialog .flow-ready{padding:10px 12px;margin:14px 0;background:#edf4f0;border-color:#d4e4db}
+.app-shell #recipe-dialog .flow-ready p{margin:0;font-size:13px;color:#305c46}
+/* Guided cooking: the current instruction and timer, with one persistent next action. */
+.app-shell #cooking{padding-bottom:calc(145px + var(--app-safe))!important}
+.app-shell #cooking .cook-header{font-size:12px;gap:10px}
+.app-shell #cooking .cook-heading{flex-wrap:nowrap;gap:12px;margin-top:12px}
+.app-shell #cooking .cook-heading h1{font:650 26px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:0}
+.cook-heading>span{font-size:12px;color:#526575;white-space:nowrap}
+.cook-progress{appearance:none;width:100%;height:4px;display:block;margin:16px auto 20px;max-width:1000px;border:0;border-radius:4px;background:#dbe3e8;overflow:hidden;accent-color:var(--cook-accent)}
+.cook-progress::-webkit-progress-bar{background:#dbe3e8}.cook-progress::-webkit-progress-value{background:var(--cook-accent)}
+.app-shell #cooking .cook-main{border:0;background:transparent;box-shadow:none;padding:0;margin-top:0}
+.app-shell #cooking .cook-step-label{font-size:12px;margin:0 0 6px;color:var(--cook-accent)}
+.app-shell #cooking #cook-step-title{font-size:24px;line-height:1.5;margin:0 0 12px;color:#18334d;outline:none}
+.app-shell #cooking .cook-instruction{font-size:20px;line-height:1.75;margin:0 0 12px;color:#18334d}
+.app-shell #cooking .cook-heat{display:inline-block;font-size:13px;line-height:1.5;color:var(--cook-accent);border:1px solid currentColor;border-radius:8px;padding:5px 9px;margin:0 0 18px}
+.cook-timer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;background:#ffffffd9;border:1px solid #d6e1e7;border-radius:16px}
+.app-shell #cooking .cook-clock{font-size:52px;line-height:1.15;letter-spacing:-.03em;font-weight:650}
+.app-shell #cooking #cook-status{font-size:12px;line-height:1.6;margin:6px 0 0;color:#526575}
+.cook-timer-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.cook-timer-actions button{min-height:44px;min-width:90px;padding:8px 12px;border:1px solid #b5c7d3;background:#fff;border-radius:10px;color:#18334d;font:inherit;font-size:14px}
+.app-shell #cooking #ask-cook-step{display:inline-block;margin:0 0 18px 10px;min-height:44px;border:0;background:transparent;color:#315f7a;font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.app-shell #cooking .cook-next-preview{font-size:13px;color:#526575;line-height:1.7;margin:18px 0 8px}
+.app-shell #cooking .cook-warning{padding:0;background:transparent;color:#62645b;font-size:12px;line-height:1.7}
+.app-shell #cooking .flow-panel:not(.cook-main){padding:0 16px;margin:16px auto;border-color:#d6e1e7;background:#ffffffb8}
+.app-shell #cooking details>summary{font-size:14px;line-height:1.6;padding:14px 0;min-height:48px}
+.cook-settings>summary span{display:block;font-size:12px;line-height:1.6;font-weight:400;color:#526575}
+.cook-settings label{display:block;font-size:14px;padding-top:12px}
+.cook-settings select{display:block;width:100%;min-height:48px;font-size:16px;border:1px solid #b5c7d3;border-radius:10px;padding:8px;background:white;color:#18334d;margin:8px 0}
+.app-shell #cooking #cook-stop{margin-bottom:16px;font-size:13px}
+.cook-controls{position:fixed;z-index:65;bottom:calc(var(--app-bar-height) + var(--app-safe));left:0;right:0;padding:9px 18px 12px;background:#fbfdff;border-top:1px solid #d4e1e9;box-shadow:0 -4px 18px #24496308;text-align:center}
+.cook-controls>span{display:block;font-size:11px;line-height:1.6;color:#526575;margin-bottom:6px}
+.cook-controls #cook-next{width:100%;min-height:50px;font-size:16px;border:0;border-radius:12px;font-family:inherit;font-weight:600;padding:10px 14px;cursor:pointer}
+@media(min-width:701px){.cook-controls{width:min(560px,100%);left:50%;right:auto;transform:translateX(-50%);border-radius:18px 18px 0 0}}
+@media(max-width:374px){.app-shell #cooking .cook-instruction{font-size:18px}.app-shell #cooking .cook-clock{font-size:46px}.cook-timer{padding:12px}}

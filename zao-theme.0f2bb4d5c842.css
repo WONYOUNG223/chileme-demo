@@ -1,0 +1,603 @@
+/* The warm paper palette is shared by the app. Functional states keep their own colours. */
+:root {
+  --zao-bg: #f8f3e9;
+  --zao-surface: #fffcf6;
+  --zao-ink: #3f2c24;
+  --zao-muted: #746255;
+  --zao-line: #e6dacc;
+  --zao-red: #a9442e;
+  --zao-red-hover: #923824;
+  --zao-gold: #d2a55b;
+  --zao-tint: #f4e6da;
+  --zao-input-line: #b89f8a;
+  --zao-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --app-bar-height: 68px;
+}
+
+body.app-shell {
+  --ink: var(--zao-ink);
+  --green: var(--zao-ink);
+  --muted: var(--zao-muted);
+  --cream: var(--zao-bg);
+  --paper: var(--zao-surface);
+  --line: var(--zao-line);
+  --lime: var(--zao-tint);
+  --orange: var(--zao-red);
+  background: var(--zao-bg);
+  color: var(--zao-ink);
+  font-family: var(--zao-font);
+  accent-color: var(--zao-red);
+}
+
+.app-shell .workspace-page {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 80px 18px 28px !important;
+}
+
+.app-shell .site-header,
+body.app-shell:has(#ingredients:not([hidden]) .fridge-entry[data-mode=closed]) .site-header {
+  background: var(--zao-surface);
+  border-bottom-color: var(--zao-line);
+  color: var(--zao-ink);
+  padding-inline: max(18px, calc((100% - 684px) / 2)) !important;
+  backdrop-filter: none;
+}
+
+.app-shell .site-header .brand,
+.app-shell .site-header .brand > span {
+  color: var(--zao-ink) !important;
+  font-family: var(--zao-font);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.app-header-title {
+  color: var(--zao-muted);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.app-back { color: var(--zao-red); min-width: 44px; }
+
+.app-tabbar {
+  background: var(--zao-surface);
+  border-top-color: var(--zao-line);
+  box-shadow: 0 -4px 16px #3f2c240a;
+  backdrop-filter: none;
+  padding-top: 5px;
+  padding-bottom: calc(5px + var(--app-safe));
+}
+
+.app-tabbar a {
+  color: var(--zao-muted);
+  font-size: 11px;
+  line-height: 1.35;
+  gap: 3px;
+}
+
+.app-tabbar a.selected { color: var(--zao-red); }
+.app-tabbar a.selected:not(.app-ai-tab) .app-tab-icon { background: var(--zao-tint); }
+.app-tabbar .app-ai-tab .app-tab-icon,
+.app-tabbar .app-ai-tab .app-zao-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--zao-tint);
+  color: var(--zao-red);
+  box-shadow: none;
+}
+
+.app-tabbar .app-ai-tab .app-zao-icon {
+  overflow: hidden;
+  border: 1px solid var(--zao-line);
+  box-sizing: border-box;
+}
+
+.app-tabbar .app-ai-tab .app-zao-icon > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.4);
+  transform-origin: 50% 25%;
+}
+
+.app-tabbar .app-ai-tab.selected .app-tab-icon {
+  background: var(--zao-tint);
+  outline: 2px solid var(--zao-red);
+  outline-offset: 1px;
+}
+
+.app-shell :is(.primary, .ghost, .app-personal-links a, .app-personal-links button) {
+  min-height: 44px;
+}
+
+.app-shell :is(.primary, .ghost) { border-radius: 12px; font-weight: 600; }
+.app-shell .primary { background: var(--zao-red); border-color: var(--zao-red); color: #fff; }
+.app-shell .primary:hover { background: var(--zao-red-hover); border-color: var(--zao-red-hover); color: #fff; }
+.app-shell .ghost { background: var(--zao-surface); border-color: var(--zao-line); color: var(--zao-ink); }
+.app-shell .ghost:hover { background: var(--zao-tint); }
+
+.app-shell .workspace-page :is(button, a, summary, input, textarea, select):focus-visible,
+.app-shell .app-tabbar a:focus-visible,
+.app-shell dialog :is(button, a, summary, input, textarea, select):focus-visible {
+  outline: 2px solid var(--zao-red);
+  outline-offset: 3px;
+}
+
+.app-shell .toast {
+  background: var(--zao-ink) !important;
+  border-color: var(--zao-ink) !important;
+  color: #fff;
+  bottom: calc(var(--app-bar-height) + var(--app-safe) + 18px);
+}
+
+.app-shell > .scroll-to-top {
+  bottom: calc(var(--app-bar-height) + var(--app-safe) + 16px);
+  color: var(--zao-ink);
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  box-shadow: 0 4px 14px #3f2c2414;
+}
+
+/* Remove scenic backdrops from working screens. The welcome journey retains its photos. */
+.app-shell :is(#ingredients, #plan, #shopping, #account, #membership),
+.app-shell #community,
+.app-shell #community.community-v2,
+.app-shell #ingredients:has(.fridge-entry[data-mode=closed]) {
+  background: var(--zao-bg);
+  color: var(--zao-ink);
+  max-width: 720px;
+  min-height: calc(100dvh - var(--app-bar-height) - var(--app-safe));
+}
+
+/* The closed fridge scene previously used !important for its blue backdrop. */
+.app-shell #ingredients:has(.fridge-entry[data-mode=closed]) { background: var(--zao-bg) !important; }
+.app-shell :is(#ingredients, #plan, #shopping)::before { content: none; }
+
+.app-shell :is(#ingredients, #plan, #shopping) .page-intro {
+  color: var(--zao-ink);
+  border-color: var(--zao-line);
+  padding-bottom: 12px;
+}
+
+.app-shell :is(#ingredients, #plan, #shopping) .page-intro h1,
+.app-shell #ingredients:has(.fridge-entry[data-mode=closed]) > .page-intro h1 {
+  color: var(--zao-ink) !important;
+  font: 650 26px/1.35 var(--zao-font) !important;
+  letter-spacing: 0 !important;
+  text-shadow: none;
+}
+
+.app-shell :is(#ingredients, #plan, #shopping) .page-intro > p,
+.app-shell #ingredients:has(.fridge-entry[data-mode=closed]) > .page-intro p {
+  color: var(--zao-muted);
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin-block: 8px 0;
+}
+
+.app-shell .workspace-page .workflow {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  border-radius: 12px;
+  backdrop-filter: none;
+}
+
+.app-shell .workspace-page .workflow a {
+  min-height: 44px;
+  color: var(--zao-muted);
+  white-space: nowrap;
+}
+
+.app-shell .workspace-page .workflow span { color: var(--zao-muted); border-color: var(--zao-line); }
+.app-shell .workspace-page .workflow i { background: var(--zao-line); }
+.app-shell .workspace-page .workflow .current { color: var(--zao-red); }
+.app-shell .workspace-page .workflow .current span {
+  background: var(--zao-red) !important;
+  border-color: var(--zao-red) !important;
+  color: #fff;
+}
+
+/* Fridge cabinet, stickers, drag handles and user scale stay in fridge-entry.css. */
+.app-shell #ingredients :is(.surface, .kitchen-card, .tip-card) {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  color: var(--zao-ink);
+  border-radius: 16px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.app-shell #ingredients :is(.surface h2, .kitchen-card summary, label, .quick-label),
+.app-shell #ingredients .fridge-heading h2 {
+  color: var(--zao-ink);
+}
+
+.app-shell #ingredients :is(.surface-title h2, .fridge-heading h2) {
+  font: 650 20px/1.4 var(--zao-font);
+}
+
+.app-shell #ingredients :is(.surface p, .surface-title > span, .catalog-summary, .catalog summary, .storage-note, .kitchen-card p, .fridge-stock-summary, .fridge-help, .fridge-scale) {
+  color: var(--zao-muted);
+}
+
+.app-shell #ingredients .fridge-entry { color: var(--zao-ink); }
+.app-shell #ingredients .fridge-heading,
+.app-shell #ingredients .fridge-toolbox,
+.app-shell #ingredients .fridge-transform { border-color: var(--zao-line); }
+.app-shell #ingredients :is(.fridge-primary, .inventory-surface > #generate-plan) {
+  background: var(--zao-red);
+  border-color: var(--zao-red);
+  color: #fff;
+}
+
+.app-shell #ingredients :is(.fridge-customize > summary, .fridge-entry .fridge-small, .fridge-toolbox textarea) {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  color: var(--zao-ink);
+}
+
+.app-shell #ingredients :is(.fridge-small, .kitchen-card summary, .catalog summary, .quick button, .condiment-grid button) {
+  min-height: 44px;
+}
+
+.app-shell #ingredients :is(.fridge-scale input, .fridge-transform input) { accent-color: var(--zao-red); }
+.app-shell #ingredients .quick button,
+.app-shell #ingredients .condiment-grid button[aria-pressed=false] {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  color: var(--zao-ink);
+  font-size: 14px;
+}
+
+.app-shell #ingredients .condiment-grid button[aria-pressed=true] {
+  background: #edf4e9;
+  border-color: #849a79;
+  color: #36563c;
+}
+
+.app-shell #ingredients .fresh-shortcuts { background: #f2eee1; }
+.app-shell #ingredients .kitchen-tools span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+.app-shell #ingredients .kitchen-tools input:checked + span { background: #edf4e9; border-color: #849a79; color: #36563c; }
+.app-shell #ingredients .kitchen-tools input:focus-visible + span { outline-color: var(--zao-red); }
+.app-shell #ingredients .fridge-shell {
+  background: #f1e8dc;
+  border-color: #d2c1ae;
+  box-shadow: 6px 8px 0 #e9ddcf;
+  color: var(--zao-ink);
+}
+.app-shell #ingredients .fridge-shell::before { background: #b99e88; }
+.app-shell #ingredients .fridge-led { background: var(--zao-ink); color: var(--zao-surface); }
+.app-shell #ingredients .fridge-shelf { background: var(--zao-tint); border-bottom-color: #d8c7b6; }
+.app-shell #ingredients .fridge-item:not(.due) { background: var(--zao-surface); border-color: var(--zao-line); }
+.app-shell #ingredients .fridge-item { color: var(--zao-ink); box-shadow: 0 3px 0 #dccaba; }
+.app-shell #ingredients #save-status { color: #36563c !important; }
+
+/* Replace the former illustrated blue people selector with compact serving controls. */
+.app-shell #ingredients .people-card {
+  display: block;
+  padding: 16px !important;
+  background: var(--zao-surface) !important;
+  border: 1px solid var(--zao-line) !important;
+  border-radius: 16px !important;
+  box-shadow: none;
+  color: var(--zao-ink);
+}
+
+.app-shell #ingredients .people-card h2 { font: 650 20px/1.4 var(--zao-font) !important; color: var(--zao-ink); }
+.app-shell #ingredients .people-card > p { color: var(--zao-muted) !important; font-size: 14px; margin-bottom: 12px !important; }
+.app-shell #ingredients .people-options button {
+  min-height: 52px;
+  padding: 8px 6px !important;
+  text-align: center !important;
+  background: var(--zao-bg) !important;
+  border: 1px solid var(--zao-line) !important;
+  border-radius: 10px !important;
+  color: var(--zao-ink) !important;
+}
+
+.app-shell #ingredients .people-options button::before,
+.app-shell #ingredients .people-options button::after { content: none; }
+.app-shell #ingredients .people-options button:hover { transform: none; }
+.app-shell #ingredients .people-options button[aria-pressed=true] {
+  background: var(--zao-tint) !important;
+  border-color: var(--zao-red) !important;
+  box-shadow: none !important;
+}
+.app-shell #ingredients .people-options strong {
+  margin: 0;
+  font: 650 14px/1.45 var(--zao-font);
+  letter-spacing: 0;
+  color: var(--zao-ink) !important;
+}
+.app-shell #ingredients .people-options small { color: var(--zao-muted) !important; font-size: 12px !important; }
+.app-shell #ingredients .aside-summary { border-color: var(--zao-line) !important; margin-block: 14px 8px !important; padding-top: 12px !important; }
+.app-shell #ingredients .aside-summary :is(span, strong, b) { color: var(--zao-ink); }
+
+/* Plan and shopping. Retain ready, missing, disabled and preference states. */
+.app-shell #plan :is(#selected-meal-plan, .match-section, .library-card, .meal, .meal-diary, .meal-record, .recipe-controls, #purchase-panel),
+.app-shell #shopping :is(.surface, .shopping-aside) {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  color: var(--zao-ink);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.app-shell #plan #selected-meal-plan :is(.meal-plan-heading, .plan-toolbar, #meals) { background: transparent; }
+.app-shell #plan #selected-meal-plan .meal-plan-heading h2,
+.app-shell #plan .recipe-library-heading h2,
+.app-shell #plan :is(.library-copy strong, .meal h3, .meal-record h3, .meal-diary h2) {
+  color: var(--zao-ink);
+  font: 650 20px/1.4 var(--zao-font);
+}
+
+.app-shell #plan #selected-meal-plan .meal-plan-heading p,
+.app-shell #plan #selected-meal-plan .plan-toolbar strong,
+.app-shell #plan .recipe-controls .filter-label,
+.app-shell #plan .recipe-library-heading p,
+.app-shell #plan :is(.library-copy small, .library-copy em, .library-copy > span:not(.tool-missing):not(.tool-ready):not(.taste-match-badge), .meal-tools, .meal-record small, .empty-plan p) {
+  color: var(--zao-muted);
+}
+
+.app-shell #plan #start-meal:not(:disabled) { background: var(--zao-red); border-color: var(--zao-red); color: #fff; }
+.app-shell #plan :is(#finish-meal, #view-diary):not(:disabled),
+.app-shell #plan .fridge-actions .ghost,
+.app-shell #plan .toolbar-actions .ghost {
+  color: var(--zao-ink);
+  background: var(--zao-tint);
+  border-color: var(--zao-line);
+}
+
+.app-shell #plan :is(#start-meal, #finish-meal):disabled {
+  background: #eee7de;
+  border-color: var(--zao-line);
+  color: var(--zao-muted);
+}
+
+.app-shell #plan .fridge-actions .primary:not(:disabled) { background: var(--zao-red); border-color: var(--zao-red); }
+.app-shell :is(#plan, #ingredients) :is(.recipe-categories, .catalog-categories) button {
+  min-height: 44px;
+  color: var(--zao-ink);
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  font-size: 13px;
+}
+
+.app-shell :is(#plan, #ingredients) :is(.recipe-categories, .catalog-categories) button[aria-pressed=true],
+.app-shell #ingredients .count-badge,
+.app-shell #shopping .count-badge {
+  background: var(--zao-red) !important;
+  border-color: var(--zao-red) !important;
+  color: #fff;
+}
+
+.app-shell #plan :is(.match-section > h3, .missing-recipes > summary, .plan-menu-preview button) { color: var(--zao-ink); }
+.app-shell #plan :is(.match-section > p, .missing-recipes > summary span, .plan-menu-preview small, .plan-menu-preview p, .plan-menu-details > summary) { color: var(--zao-muted); }
+.app-shell #plan :is(.plan-menu-preview button, .plan-menu-details) { border-color: var(--zao-line); }
+.app-shell #plan .recipe-controls .kitchen-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--zao-red); }
+.app-shell #plan .library-copy .tool-missing { color: #873b1c; }
+.app-shell #plan .meal-status:not(.ready) { color: #873b1c; }
+.app-shell #plan :is(.library-copy .tool-ready, .meal-status.ready, .match-reason) { color: #36563c !important; }
+.app-shell #plan :is(.library-card, .meal):hover { border-color: var(--zao-input-line); box-shadow: none; transform: none; }
+.app-shell #plan .flow-resume:not(:empty) { background: #edf4e9; color: #36563c; }
+.app-shell :is(#plan, #recipe-dialog) .photo-pending { background: var(--zao-tint); color: var(--zao-muted); }
+.app-shell #plan .library-photo.photo-pending {
+  aspect-ratio: auto;
+  min-height: 48px;
+  flex-direction: row;
+  gap: 8px;
+}
+.app-shell #plan .library-photo.photo-pending .pending-symbol { font-size: 16px; }
+
+.app-shell .taste-preferences {
+  color: var(--zao-ink);
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+}
+.app-shell .taste-preferences :is(summary span, p) { color: var(--zao-muted); }
+.app-shell .taste-setting-grid label { color: var(--zao-ink); }
+.app-shell .taste-setting-grid select { color: var(--zao-ink); background: var(--zao-surface); border-color: var(--zao-input-line); }
+.app-shell .taste-result-note { color: var(--zao-ink); background: var(--zao-tint); }
+.app-shell .fridge-tag { color: var(--zao-ink); background: var(--zao-tint); }
+
+.app-shell #shopping .shopping-list li { border-color: var(--zao-line); }
+.app-shell #shopping .shopping-list input:checked { background: var(--zao-red) !important; border-color: var(--zao-red) !important; }
+.app-shell #shopping .shopping-list .amount { color: var(--zao-muted); }
+.app-shell #shopping .shopping-gallery { background: transparent; border-color: var(--zao-line); }
+.app-shell #shopping .shopping-gallery-copy h2 { color: var(--zao-ink); text-shadow: none; font: 650 20px/1.4 var(--zao-font); }
+.app-shell #shopping .shopping-gallery-track figcaption { background: var(--zao-surface); color: var(--zao-ink); }
+
+/* Social feed and older community fallback. */
+.app-shell #social-v2 { color: var(--zao-ink); }
+.app-shell #social-v2 .sv-top { margin: 0 0 14px; }
+.app-shell #social-v2 .sv-top h1 { font: 650 26px/1.35 var(--zao-font); margin: 5px 0; }
+.app-shell #social-v2 :is(.sv-top p, .sv-kicker, .sv-status, .sv-card-body, .sv-person, .sv-tag) { color: var(--zao-muted); }
+.app-shell #social-v2 .sv-top p { font-size: 14px; line-height: 1.6; }
+.app-shell #social-v2 .sv-compose { min-height: 44px; background: var(--zao-red); border-radius: 12px; color: #fff; }
+.app-shell #social-v2 :is(.sv-tools button, .sv-chip),
+.app-shell .sv-dialog :is(.sv-actions button, .sv-person-actions button) {
+  min-height: 44px;
+  border-color: var(--zao-line);
+  background: var(--zao-surface);
+  color: var(--zao-ink);
+}
+.app-shell #social-v2 .sv-chip[aria-pressed=true] { background: var(--zao-red); border-color: var(--zao-red); color: #fff; }
+.app-shell #social-v2 .sv-tabs { border-color: var(--zao-line); }
+.app-shell #social-v2 .sv-tabs button { min-height: 44px; font-size: 16px; color: var(--zao-muted); }
+.app-shell #social-v2 .sv-tabs button[aria-selected=true] { color: var(--zao-red); border-color: var(--zao-red); }
+.app-shell #social-v2 :is(.sv-card, .sv-empty) { background: var(--zao-surface); border-color: var(--zao-line); box-shadow: none; }
+.app-shell #social-v2 .sv-empty { color: var(--zao-muted); }
+.app-shell #social-v2 .sv-title { min-height: 44px; color: var(--zao-ink); }
+.app-shell #social-v2 :is(.sv-person, .sv-heart) { min-height: 44px; }
+.app-shell #social-v2 .sv-heart { min-width: 44px; }
+.app-shell #social-v2 .sv-heart[aria-pressed=true] { color: var(--zao-red); }
+.app-shell :is(#social-v2, .sv-dialog) :is(.sv-avatar, .sv-photo, .sv-image-fail, .sv-gallery img) { background: var(--zao-tint); color: var(--zao-ink); }
+.app-shell #community :is(.community-hero > div:first-child, .community-card, .creator-sidebar .surface, .co-create-card) {
+  background: var(--zao-surface);
+  border: 1px solid var(--zao-line);
+  color: var(--zao-ink);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.app-shell #community .community-hero h1 { font: 650 26px/1.35 var(--zao-font) !important; color: var(--zao-ink); }
+.app-shell #community .community-hero p { color: var(--zao-muted); }
+.app-shell #community #publish-post { background: var(--zao-red); color: #fff; border-color: var(--zao-red); box-shadow: none; backdrop-filter: none; }
+
+/* Personal and login. */
+.app-shell .app-profile-card h1 { color: var(--zao-ink); font: 650 26px/1.35 var(--zao-font); }
+.app-shell :is(.app-profile-card p, .app-kicker, .app-personal-stats span, .app-personal-links small, .app-local-note, .app-account-details > summary span) { color: var(--zao-muted); }
+.app-shell .app-avatar { background: var(--zao-tint); color: var(--zao-red); }
+.app-shell :is(.app-personal-stats, .app-personal-links, .app-account-details, .welcome-login .auth-panel) {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+.app-shell .app-personal-stats > div + div,
+.app-shell .app-personal-links > * + * { border-color: var(--zao-line); }
+.app-shell :is(.app-personal-stats strong, .app-personal-links a, .app-personal-links button, .app-account-details > summary) { color: var(--zao-ink); }
+.app-shell .app-personal-links b { color: var(--zao-red); }
+.app-shell .app-personal-links :is(a, button) { min-height: 58px; padding-block: 12px; }
+.app-shell .app-account-details > summary { min-height: 52px; }
+.app-shell :is(#account, .welcome-login) :is(.profile-identity h3, .auth-panel h2, .surface-title h2, .password-settings summary, .stacked-form label) { color: var(--zao-ink); }
+.app-shell :is(#account, .welcome-login) :is(.fine-print, .profile-identity p, .profile-identity > span) { color: var(--zao-muted); }
+.app-shell :is(#account, .welcome-login) .auth-tabs button { min-height: 44px; color: var(--zao-muted); }
+.app-shell :is(#account, .welcome-login) .auth-tabs button[aria-pressed=true] { color: var(--zao-red); border-color: var(--zao-red); }
+
+.app-shell #home,
+.app-shell #home .kitchen-entry,
+.app-shell .welcome-login { background: var(--zao-bg); color: var(--zao-ink); }
+.app-shell #home .journey-stage { background-color: #493025; }
+.app-shell #home .journey-stage::before { filter: sepia(0.88) saturate(0.9) brightness(0.86); }
+.app-shell #home .journey-stage::after { background-color: var(--zao-bg); }
+.app-shell .welcome-shortcut { background: var(--zao-surface); color: var(--zao-red); border-color: var(--zao-line); }
+.app-shell .welcome-login > h2 { font: 650 26px/1.4 var(--zao-font); }
+.app-shell .welcome-login > p,
+.app-shell #home .kitchen-entry-copy > p { color: var(--zao-muted); font-size: 15px; line-height: 1.7; }
+.app-shell #home .kitchen-entry-copy h2 { font: 650 26px/1.4 var(--zao-font); letter-spacing: 0; }
+.app-shell #home .kitchen-entry-copy > span,
+.app-shell #home .kitchen-steps-head { color: var(--zao-muted); }
+.app-shell #home .kitchen-steps-head p { color: var(--zao-ink); }
+.app-shell #home .kitchen-step { background: var(--zao-surface); border-color: var(--zao-line); color: var(--zao-ink); }
+.app-shell #home .kitchen-step :is(p, span) { color: var(--zao-muted); border-color: var(--zao-line); }
+.app-shell #home .kitchen-entry { padding-block: 52px; }
+.app-shell .welcome-login { padding-top: 32px; }
+
+.app-shell #membership .membership-heading h1 { color: var(--zao-ink); font: 650 26px/1.4 var(--zao-font); }
+.app-shell #membership :is(.tier-card, .tier-card.featured, .membership-promise) { background: var(--zao-surface); color: var(--zao-ink); border-color: var(--zao-line); }
+.app-shell #membership .tier-card.featured { border-color: var(--zao-gold); }
+.app-shell #membership :is(.tier-card p, .tier-card small, .tier-card li, .tier-price span, .tier-card.featured h2 span, .membership-heading p, .membership-promise p) { color: var(--zao-muted); }
+.app-shell #membership .tier-card li::before { color: var(--zao-red) !important; }
+.app-shell #membership :is(.launch-badge, .tier-recommend) { background: var(--zao-tint); color: var(--zao-ink); border-color: var(--zao-line); }
+
+/* Dialogs share paper and readable controls. Native file and toggle widgets keep their behaviour. */
+.app-shell :is(#recipe-dialog, .fridge-dialog, .sv-dialog, .social-dialog, .social-dialog#publish-dialog) {
+  background: var(--zao-surface);
+  color: var(--zao-ink);
+  border: 1px solid var(--zao-line);
+  border-radius: 18px;
+  box-shadow: 0 14px 40px #3f2c2429;
+  backdrop-filter: none;
+}
+.app-shell :is(#recipe-dialog, .fridge-dialog, .sv-dialog, .social-dialog)::backdrop {
+  background: #33211a8c;
+  backdrop-filter: none;
+}
+.app-shell :is(#recipe-dialog, .fridge-dialog, .sv-dialog, .social-dialog) h2 { font: 650 22px/1.4 var(--zao-font); color: var(--zao-ink); }
+.app-shell :is(#recipe-dialog, .fridge-dialog, .sv-dialog, .social-dialog) h3 { color: var(--zao-ink); }
+.app-shell :is(dialog .close-dialog, dialog .sv-close) {
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--zao-tint);
+  color: var(--zao-ink);
+}
+
+.app-shell :is(.stacked-form, .comment-form, .ingredient-form, .catalog, .fridge-dialog, .sv-dialog, .social-dialog#publish-dialog) :is(input:not([type=file]):not([type=checkbox]):not([type=radio]), textarea, select) {
+  background: var(--zao-surface);
+  border-color: var(--zao-input-line);
+  color: var(--zao-ink);
+  min-height: 44px;
+}
+
+.app-shell .flow-panel { background: var(--zao-surface); color: var(--zao-ink); border-color: var(--zao-line); }
+.app-shell :is(.flow-panel p, .flow-panel li, .fridge-note, .sv-muted, .sv-row p) { color: var(--zao-muted); }
+.app-shell :is(.flow-shortage, .sv-row, .sv-message-form) { border-color: var(--zao-line); }
+.app-shell :is(.flow-shortage strong, #recipe-dialog .flow-panel h3, #recipe-dialog .flow-panel strong) { color: var(--zao-ink); }
+.app-shell :is(.flow-actions button, .purchase-recipe button, .cook-choice, #cook-stop, #cook-enable-notifications) {
+  background: var(--zao-surface);
+  color: var(--zao-ink);
+  border-color: var(--zao-input-line);
+}
+.app-shell .flow-actions button:disabled { background: #eee7de; color: var(--zao-muted); }
+.app-shell #recipe-dialog { max-width: min(680px, calc(100% - 24px)); padding-top: 68px; }
+.app-shell #recipe-dialog #close-dialog {
+  top: 12px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  line-height: 1;
+}
+.app-shell #recipe-dialog .recipe-note { color: var(--zao-muted); }
+.app-shell #recipe-dialog .recipe-note.match-reason { color: var(--zao-muted) !important; }
+.app-shell #recipe-dialog .recipe-timeline p { color: var(--zao-ink); font-size: 15px !important; line-height: 1.7; }
+.app-shell #recipe-dialog .recipe-timeline h4 { font-size: 16px; }
+.app-shell #recipe-dialog :is(.nutrition-banner, .doneness-note, .fridge-amounts) { background: var(--zao-tint); }
+.app-shell .meal-review-dialog .fridge-actions .primary { background: var(--zao-red); }
+.app-shell .sv-dialog .sv-bubble { background: var(--zao-tint); }
+.app-shell .sv-dialog .sv-bubble.mine { background: var(--zao-red); color: #fff; }
+
+/* Guided cooking uses the existing flavour accents for heat, progress, clock and next step. */
+.app-shell #cooking { max-width: 720px; color: var(--zao-ink); }
+.app-shell #cooking[data-taste=default] { --cook-bg: var(--zao-bg); --cook-accent: var(--zao-red); }
+.app-shell #cooking :is(.cook-heading h1, #cook-step-title, .cook-instruction) { color: var(--zao-ink); }
+.app-shell #cooking :is(.cook-header, .cook-heading > span, #cook-status, .cook-next-preview, .cook-warning, .cook-settings > summary span) { color: var(--zao-muted); }
+.app-shell #cooking :is(.cook-timer, .flow-panel:not(.cook-main), .cook-controls) {
+  background: var(--zao-surface);
+  border-color: var(--zao-line);
+  box-shadow: none;
+}
+.app-shell #cooking :is(.cook-timer-actions button, .cook-settings select) { background: var(--zao-surface); color: var(--zao-ink); border-color: var(--zao-input-line); }
+.app-shell #cooking #ask-cook-step { color: var(--cook-accent); }
+.app-shell #cooking .cook-controls > span { color: var(--zao-muted); }
+.app-shell #cooking .cook-progress,
+.app-shell #cooking .cook-progress::-webkit-progress-bar { background: var(--zao-line); }
+
+@media (max-width: 700px) {
+  .app-shell #ingredients :is(.surface, .kitchen-card),
+  .app-shell #plan :is(#selected-meal-plan, .match-section, .recipe-controls) { padding: 14px; }
+  .app-shell #ingredients .fridge-entry[data-mode=closed] { padding: 0; }
+  .app-shell #plan .recipe-controls { flex-wrap: wrap; gap: 8px; }
+  .app-shell #plan .recipe-controls .kitchen-link { padding-top: 0; }
+  .app-shell #social-v2 .sv-feed { gap: 10px; }
+  .app-shell #social-v2 .sv-person { flex: 1; }
+  .app-shell #social-v2 .sv-heart { flex-shrink: 0; }
+  .app-shell #recipe-dialog { padding: 68px 16px 22px; }
+  .app-shell #recipe-dialog .recipe-timeline li { grid-template-columns: 64px minmax(0, 1fr); }
+}
+
+@media (max-width: 360px) {
+  .app-shell .workspace-page { padding-inline: 14px !important; }
+  .app-shell .workspace-page .workflow { padding-inline: 7px; }
+  .app-shell .workspace-page .workflow a { font-size: 11px !important; }
+  .app-shell .workspace-page .workflow i { width: 5px; }
+}

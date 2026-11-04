@@ -1,0 +1,72 @@
+/* The chat uses its own scroll region; the composer stays inside the visible
+   viewport. The rest of the app keeps normal page scrolling. */
+body.app-shell[data-app-page="ai"]{overflow:hidden;padding-bottom:0;overscroll-behavior:none}
+body.app-shell[data-app-page="ai"]>.scroll-to-top{display:none!important}
+body.app-shell[data-app-page="ai"] .site-header{top:var(--app-viewport-top,0px)}
+.app-shell #ai.kitchen-ai-page{--chat-bottom:calc(var(--app-bar-height,68px) + var(--app-safe,0px));position:fixed;top:calc(60px + var(--app-viewport-top,0px));left:0;right:0;width:100%;max-width:620px;margin:0 auto!important;height:calc(var(--app-viewport-height,100dvh) - 60px - var(--chat-bottom));min-height:0!important;padding:0!important;display:flex;flex-direction:column;overflow:hidden;text-align:left;background:var(--zao-bg,#f8f3e9);color:var(--zao-ink,#3f2c24);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+.app-keyboard-open #ai.kitchen-ai-page{--chat-bottom:0px}
+.kitchen-ai-page *{box-sizing:border-box}
+.kitchen-ai-page [hidden]{display:none!important}
+.kitchen-ai-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.kitchen-ai-return{display:block;flex-shrink:0;min-height:40px;font-size:13px;line-height:24px;color:var(--zao-red,#a9442e);padding:8px 20px 4px;text-decoration:none}
+.kitchen-ai-head{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-bottom:1px solid var(--zao-line,#e6dacc);background:var(--zao-surface,#fffcf6)}
+.kitchen-ai-identity{display:flex;align-items:center;gap:11px;min-width:0}
+.kitchen-ai-avatar{width:44px;height:44px;flex-shrink:0;overflow:hidden;border-radius:50%;background:var(--zao-tint,#f4e6da);border:1px solid #ddc5a6}
+.kitchen-ai-avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transform:scale(1.48);transform-origin:50% 25%}
+.app-shell .kitchen-ai-head h1{display:flex;align-items:center;gap:7px;font:650 18px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;letter-spacing:0;margin:0;color:var(--zao-ink,#3f2c24)}
+.kitchen-ai-head h1>span{font:600 10px/1.6 -apple-system,sans-serif;border:1px solid #dec5a6;border-radius:5px;padding:0 4px;color:#8b4c2e}
+.kitchen-ai-head p{font-size:12px;line-height:1.5;margin:2px 0 0;color:var(--zao-muted,#746255)}
+.kitchen-ai-head button{flex-shrink:0;border:0;border-radius:9px;background:transparent;color:var(--zao-red,#a9442e);font:inherit;font-size:13px;font-weight:500;min-height:44px;padding:0 4px;cursor:pointer}
+.kitchen-ai-scroll{min-height:0;flex:1;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#d1ba9e transparent;padding:0 20px;-webkit-overflow-scrolling:touch}
+.kitchen-ai-intro{padding:22px 0 18px}
+.kitchen-ai-welcome{display:flex;align-items:center;justify-content:space-between;gap:0;min-height:188px}
+.kitchen-ai-welcome>div{min-width:0;flex:1;position:relative;z-index:1}
+.kitchen-ai-eyebrow{display:block;font-size:11px;letter-spacing:.09em;color:#8f5937;margin-bottom:9px}
+.app-shell .kitchen-ai-intro h2{font:650 25px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;letter-spacing:-.03em;margin:0 0 12px;color:var(--zao-ink,#3f2c24)}
+.kitchen-ai-welcome p{font-size:12px;line-height:1.85;color:var(--zao-muted,#746255);margin:0}
+.kitchen-ai-welcome>img{width:48%;max-width:195px;height:auto;flex-shrink:0;margin-right:-8px;filter:drop-shadow(0 9px 9px #7b3d1d0d)}
+.kitchen-ai-suggestions-label{margin:24px 0 12px;font-size:12px;color:var(--zao-muted,#746255)}
+.kitchen-ai-starters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.kitchen-ai-starters button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:9px;text-align:left;min-height:84px;border:1px solid var(--zao-line,#e6dacc);border-radius:14px;background:var(--zao-surface,#fffcf6);padding:13px 12px;color:var(--zao-red,#a9442e);font:inherit;font-size:13px;line-height:1.5;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.kitchen-ai-starters button span{color:var(--zao-ink,#3f2c24);font-size:13px;font-weight:500;white-space:nowrap}
+.kitchen-ai-starters svg{width:23px;height:23px}
+.kitchen-ai-messages{padding:4px 0 12px;overflow-wrap:anywhere}
+.kitchen-ai-message{margin:20px 0 24px;padding:0}
+.kitchen-ai-speaker{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:500;color:var(--zao-muted,#746255);line-height:30px}
+.kitchen-ai-speaker img{width:30px;height:30px;object-fit:cover;object-position:50% 15%;border-radius:50%;background:var(--zao-tint,#f4e6da)}
+.kitchen-ai-message p{white-space:pre-wrap;margin:6px 0 0;font-size:15px;line-height:1.85;color:var(--zao-ink,#3f2c24)}
+.kitchen-ai-message--user{width:fit-content;max-width:90%;margin-left:auto;border-radius:16px 16px 4px 16px;background:var(--zao-tint,#f4e6da);padding:11px 14px;border:1px solid #e9d8c5}
+.kitchen-ai-message--user .kitchen-ai-speaker{display:none}
+.kitchen-ai-message--user p{margin:0;font-size:15px;line-height:1.7}
+.kitchen-ai-message--assistant{padding:0 2px 8px}
+.kitchen-ai-thinking{font-size:13px;line-height:1.7;color:var(--zao-muted,#746255);padding:10px 0}
+.kitchen-ai-composer{flex-shrink:0;border-top:1px solid var(--zao-line,#e6dacc);padding:12px 16px 8px;background:var(--zao-surface,#fffcf6);box-shadow:0 -7px 18px #5f372804}
+.kitchen-ai-input-row{display:flex;align-items:flex-end;gap:8px;border:1px solid #d6c3ad;border-radius:18px;padding:5px 5px 5px 12px;background:#fff;transition:border-color .15s}
+.kitchen-ai-input-row:focus-within{border-color:var(--zao-red,#a9442e);box-shadow:0 0 0 2px #a9442e0a}
+.kitchen-ai-composer textarea{display:block;flex:1;min-width:0;width:100%;min-height:44px;max-height:112px;padding:10px 0;border:0;border-radius:0;background:transparent;color:var(--zao-ink,#3f2c24);font:400 16px/24px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;resize:none;outline:none;-webkit-appearance:none}
+.kitchen-ai-composer textarea::placeholder{color:#89796c;opacity:1}
+.kitchen-ai-compose-actions{flex-shrink:0;display:flex;align-items:center}
+.kitchen-ai-compose-actions button{display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;border:0;border-radius:14px;padding:9px;background:var(--zao-red,#a9442e);color:#fff;cursor:pointer}
+.kitchen-ai-compose-actions svg{width:24px;height:24px}
+.kitchen-ai-compose-actions #kitchen-ai-stop{background:#6d5140}
+.kitchen-ai-input-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:7px 2px 0;font-size:10px;line-height:1.6;color:var(--zao-muted,#746255);font-variant-numeric:tabular-nums}
+.kitchen-ai-page button:disabled{opacity:.45;cursor:default}
+.kitchen-ai-page button:focus-visible,.kitchen-ai-notice summary:focus-visible{outline:2px solid var(--zao-red,#a9442e);outline-offset:3px}
+#kitchen-ai-status{margin:6px 2px 0;font-size:11px;line-height:1.6;color:var(--zao-muted,#746255);max-height:54px;overflow:auto}
+#kitchen-ai-status:empty{display:none}
+#kitchen-ai-status.is-error{color:#9b3424}
+.kitchen-ai-notice{font-size:10px;line-height:1.6;color:var(--zao-muted,#746255);margin:3px 2px 0}
+.kitchen-ai-notice summary{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:30px;cursor:pointer;list-style:none}
+.kitchen-ai-notice summary::-webkit-details-marker{display:none}
+.kitchen-ai-notice summary>span{color:#8d482f;text-decoration:underline;text-underline-offset:3px}
+.kitchen-ai-notice[open]{max-height:122px;overflow:auto}
+.kitchen-ai-footnote,.kitchen-ai-model{margin:5px 0 8px;line-height:1.8;color:var(--zao-muted,#746255);font-size:11px}
+.kitchen-ai-context{display:flex;justify-content:space-between;align-items:center;gap:8px;border-left:3px solid var(--zao-gold,#d2a55b);padding:4px 8px;margin-bottom:9px;background:#f4e9d8;border-radius:0 8px 8px 0}
+.kitchen-ai-context>div{min-width:0}
+.kitchen-ai-context span{display:block;font-size:10px;line-height:1.6;color:var(--zao-muted,#746255)}
+.kitchen-ai-context strong{display:block;font-size:12px;line-height:1.6;color:var(--zao-ink,#3f2c24);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kitchen-ai-context button{flex-shrink:0;width:44px;min-height:44px;border:0;background:none;color:var(--zao-muted,#746255);font-size:24px;cursor:pointer}
+@media(min-width:701px){.app-shell #ai.kitchen-ai-page{border-inline:1px solid var(--zao-line,#e6dacc)}.kitchen-ai-scroll{padding-inline:28px}.kitchen-ai-composer{padding-inline:24px}.kitchen-ai-intro{max-width:480px;margin:18px auto}.kitchen-ai-welcome>img{max-width:205px}.kitchen-ai-message p{font-size:16px}}
+@media(max-width:374px){.kitchen-ai-head{padding:8px 16px}.kitchen-ai-scroll{padding-inline:16px}.kitchen-ai-intro{padding-top:16px}.app-shell .kitchen-ai-intro h2{font-size:22px}.kitchen-ai-welcome{min-height:160px}.kitchen-ai-starters{gap:6px}.kitchen-ai-starters button{padding:12px 9px}.kitchen-ai-starters button span{font-size:12px}}
+@media(max-height:640px){.kitchen-ai-head{padding-block:7px}.kitchen-ai-return{padding-block:4px;min-height:32px}.kitchen-ai-intro{padding-top:12px}.kitchen-ai-suggestions-label{margin-top:12px}.kitchen-ai-composer{padding-top:8px}.kitchen-ai-input-meta>span:first-child{display:none}.kitchen-ai-input-meta{position:absolute;right:74px;bottom:46px;pointer-events:none}.kitchen-ai-notice{margin-top:2px}}
+@media(prefers-reduced-motion:reduce){.kitchen-ai-page *{scroll-behavior:auto!important;transition:none!important}}

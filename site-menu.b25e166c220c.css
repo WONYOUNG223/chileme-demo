@@ -1,0 +1,19 @@
+/* A close, left-hand navigation drawer keeps the current page visible. */
+.site-menu-toggle,.site-menu-close{appearance:none;border:0;background:transparent;color:currentColor;cursor:pointer}
+.site-menu-toggle{width:45px;height:45px;display:grid;place-content:center;gap:7px;padding:0;color:#fff;text-shadow:0 1px 18px #07214c88}
+.site-menu-toggle i,.site-menu-close i{display:block;width:27px;height:1px;background:currentColor;transition:transform .24s ease}
+.site-menu-toggle:focus-visible,.site-menu-close:focus-visible,.site-menu a:focus-visible{outline:2px solid #fff;outline-offset:6px}
+.site-menu{inset:0 auto 0 0;width:min(38vw,580px);height:100dvh;max-width:none;max-height:none;margin:0;border:0;border-radius:0;padding:0;background:#104d7be8;color:#fff;overflow:auto;box-shadow:18px 0 56px #071c3970}
+.site-menu::backdrop{background:#061c3966;backdrop-filter:blur(3px)}
+.site-menu-inner{position:relative;min-height:100%;box-sizing:border-box;padding:clamp(28px,5vw,74px) clamp(30px,5.3vw,86px) clamp(38px,6vw,84px);display:flex;flex-direction:column;isolation:isolate;background:linear-gradient(155deg,#0a4e79ee,#155c95e8 64%,#2f7eb0e8)}
+.site-menu-inner:before{content:"吃";position:absolute;z-index:-1;left:-.15em;bottom:-.22em;color:#d8f0ff12;font:400 min(44vw,620px)/.72 "Songti SC","SimSun",Georgia,serif;pointer-events:none}
+.site-menu-close{position:absolute;top:clamp(20px,3vw,43px);right:clamp(20px,3vw,44px);width:44px;height:44px;display:grid;place-content:center;color:#fff}
+.site-menu-close i:first-child{transform:translateY(1px) rotate(45deg)}.site-menu-close i:last-child{transform:rotate(-45deg)}
+.site-menu-kicker{margin:0 0 clamp(18px,4vh,44px);font:400 14px "Songti SC","SimSun",Georgia,serif;letter-spacing:.08em;color:#fff}
+.site-menu h2{margin:0 0 clamp(30px,6vh,72px);font:400 clamp(33px,3.4vw,55px)/1.12 "Songti SC","SimSun",Georgia,serif;letter-spacing:-.07em}
+.site-menu-nav{display:grid;width:100%;border-top:1px solid #ffffff5e}.site-menu-nav a{display:flex;align-items:center;gap:12px;padding:clamp(11px,1.5vh,18px) 0;border-bottom:1px solid #ffffff45;color:#fff;font:400 clamp(24px,2.6vw,39px)/1.13 "Songti SC","SimSun",Georgia,serif;letter-spacing:-.055em;transition:padding .22s ease,opacity .22s ease}.site-menu-nav a:hover,.site-menu-nav a.active{padding-left:12px;opacity:.74}.site-menu-nav #nav-count{margin-left:auto;min-width:20px;padding:1px 6px;border:1px solid #ffffff77;border-radius:999px;background:transparent;color:#fff;font:11px "Avenir Next","PingFang SC",sans-serif;letter-spacing:0;text-align:center}
+.site-menu-account{width:max-content;margin-top:auto;padding:13px 0 4px;border-bottom:1px solid #fff;color:#fff;font-size:13px;letter-spacing:.06em}.site-menu-note{display:none}
+html:has(.site-menu[open]){overflow:hidden}
+@media(max-width:900px){.site-menu{width:min(77vw,480px)}.site-menu-inner{padding:34px 9% 42px}.site-menu h2{font-size:clamp(34px,7vw,49px)}.site-menu-nav a{font-size:clamp(26px,5vw,35px)}}
+@media(max-width:560px){.site-menu{width:88vw}.site-menu-inner{padding:28px 9% 38px}.site-menu-kicker{margin-bottom:30px}.site-menu h2{margin-bottom:38px}.site-menu-nav a{padding:14px 0;font-size:31px}}
+@media(prefers-reduced-motion:reduce){.site-menu-toggle i,.site-menu-nav a{transition:none}}

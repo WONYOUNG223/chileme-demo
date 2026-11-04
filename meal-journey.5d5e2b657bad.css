@@ -1,0 +1,202 @@
+/* One scrollable scene: a warm bowl gives way to a rotating Qinghua plate. */
+html { scroll-behavior: auto; }
+:root { --porcelain-blue: #174779; --porcelain-ink: #22455f; }
+#home { animation: none; }
+.site-header { position: absolute; background: transparent; height: 88px; }
+.site-header .brand { font-family: "Songti SC", "SimSun", Georgia, serif; font-size: 25px; }
+.site-header nav a { font-size: 12px; }
+.site-header nav a.active:after { bottom: 22px; }
+.meal-journey { position: relative; background: #e2edf4; isolation: isolate; }
+.meal-journey.is-enhanced { height: 480svh; }
+.meal-journey.is-enhanced.is-reduced { height: 180svh; }
+.journey-stage {
+  --intro-opacity: 1; --intro-y: 0px; --bowl-opacity: 1; --bowl-y: 0px;
+  --bowl-scale: 1; --bowl-rotate: 0deg; --plate-opacity: 0; --plate-y: 700px;
+  --plate-scale: .86; --plate-angle: -45deg; --scene-mix: 0;
+  --controls-opacity: 0; --heading-opacity: 0; --progress: 0;
+  position: relative; height: 100svh;
+  color: var(--porcelain-ink); overflow: clip;
+  background: linear-gradient(120deg, #f9fcff 0%, #eaf3f8 33%, #cedfeb 70%, #a9c6df 100%);
+}
+.is-enhanced .journey-stage { position: sticky; top: 0; }
+.journey-wash { position: absolute; inset: 0; background: linear-gradient(130deg,#fff 8%,#f6f9fc 54%,#dce8f2 100%); opacity: var(--scene-mix); pointer-events: none; }
+.journey-mountains { position: absolute; z-index: 1; left: -5%; bottom: -5%; width: 110%; height: min(54vw,520px); opacity: .48; pointer-events: none; overflow: visible; }
+.journey-mist-reference { position: absolute; z-index: 0; left: -5%; bottom: 0; width: 110%; height: 44%; object-fit: cover; object-position: center 68%; opacity: .16; filter: grayscale(1) sepia(.12) hue-rotate(155deg) saturate(.6); mix-blend-mode: multiply; -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 31%,#000 100%); mask-image:linear-gradient(to bottom,transparent 0,#000 31%,#000 100%); pointer-events: none; animation: mist-drift 31s ease-in-out infinite alternate; }
+.mountain-layer { transform-box: fill-box; transform-origin: center bottom; animation: mountain-drift 22s ease-in-out infinite alternate; }
+.mountain-far { fill: #a9c4d5; opacity: .48; animation-duration: 29s; }
+.mountain-mid { fill: #7d9fb7; opacity: .32; animation-duration: 24s; animation-delay: -8s; }
+.mountain-near { fill: #547f9f; opacity: .22; animation-duration: 20s; animation-delay: -14s; }
+@keyframes mountain-drift { from { transform: translate3d(-1.4%,.6%,0); } to { transform: translate3d(1.4%,-.6%,0); } }
+@keyframes mist-drift { from { transform: scale(1.03) translateX(-1%); } to { transform: scale(1.08) translateX(1%); } }
+.journey-stage:after { content: ''; position: absolute; left: -4%; right: -4%; bottom: -9%; height: 21%; border-radius: 50% 50% 0 0; background: #f9fbfd; opacity: calc(1 - var(--scene-mix)); pointer-events: none; z-index: 1; }
+.journey-intro { position: absolute; z-index: 4; left: 0; right: 0; top: max(108px, 14svh); text-align: center; opacity: var(--intro-opacity); transform: translateY(var(--intro-y)); }
+.journey-intro-note { font-size: 12px; margin: 0 0 15px; letter-spacing: .18em; color: #4d7694; }
+.journey-intro h1 { font: 400 clamp(48px,5.5vw,88px)/1.13 "Songti SC", "SimSun", Georgia, serif; letter-spacing: -.065em; margin: 0; color: #214967; }
+.journey-intro-desc { font-size: 13px; line-height: 1.85; margin: 22px 0 20px; color: #506f87; }
+.mobile-break { display: none; }
+.journey-start-link { display: inline-flex; align-items: center; gap: 24px; border: 1px solid #6389a385; border-radius: 50px; padding: 10px 18px; font-size: 11px; background: #f9fcff75; transition: background .2s,color .2s; }
+.journey-start-link:hover { background: #244f73; color: #fff; }
+.journey-scroll-start { position: absolute; z-index: 7; display: flex; align-items: center; gap: 16px; left: 4.5vw; bottom: 30px; color: #315b7b; background: transparent; border: 0; padding: 7px 0; font: 11px "PingFang SC", "Microsoft YaHei", sans-serif; opacity: var(--intro-opacity); }
+.scroll-stem { font: 28px Georgia, serif; }
+.journey-bowl { position: absolute; z-index: 3; left: 50%; top: 40svh; width: min(62vw,870px); opacity: var(--bowl-opacity); transform: translate(-50%,var(--bowl-y)) rotate(var(--bowl-rotate)) scale(var(--bowl-scale)); transform-origin: center 70%; pointer-events: none; }
+.journey-bowl img { display: block; width: 100%; height: auto; filter: drop-shadow(0 22px 23px #31597a16); user-select: none; }
+.journey-heading { position: absolute; top: 29px; left: 4.5%; right: 4.5%; display: flex; justify-content: space-between; font-size: 11px; color: #527191; opacity: var(--heading-opacity); z-index: 7; pointer-events: none; }
+.journey-heading span:last-child { margin-right: 110px; }
+.journey-skip { position: absolute; top: 101px; right: 4.5%; z-index: 8; padding: 4px 0; border: 0; background: transparent; color: #456682; font-size: 11px; display: flex; gap: 9px; border-bottom: 1px solid #8ca4b455; }
+.journey-motion { position: absolute; z-index: 8; right: 4.5%; bottom: 30px; padding: 5px 0; font-size: 10px; color: #658199; border: 0; background: transparent; }
+.journey-motion:disabled { cursor: default; opacity: .6; }
+.journey-plate { position: absolute; z-index: 5; top: 51%; left: 50%; width: min(80svh,63vw,790px); aspect-ratio: 1; opacity: var(--plate-opacity); transform: translate(-50%,calc(-50% + var(--plate-y))) scale(var(--plate-scale)); transform-origin: center; }
+.journey-plate-art { display: block; width: 100%; height: 100%; object-fit: contain; transform: rotate(var(--plate-angle)); filter: drop-shadow(0 18px 18px #34496412); user-select: none; pointer-events: none; }
+.journey-meal-copy { --copy-opacity: 0; --copy-y: 0px; position: absolute; z-index: 1; inset: 26% 20% 23%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: var(--copy-opacity); transform: translateY(var(--copy-y)); color: var(--porcelain-blue); }
+.meal-hour { font-size: 10px; letter-spacing: .18em; color: #506b92; margin-bottom: 10px; }
+.journey-meal-copy h2 { font: 400 clamp(38px,5.5vw,78px)/1.05 "Songti SC", "SimSun", Georgia, serif; letter-spacing: .02em; margin: 0 0 8px; }
+.meal-english { font: italic 23px/1.25 "Palatino Linotype",Georgia,serif; color: #729cb6; letter-spacing: -.04em; }
+.journey-meal-copy p { font-size: clamp(10px,.96vw,13px); line-height: 1.95; margin: 18px -10px; color: #526680; }
+.meal-copy-link { display: flex; align-items: center; gap: 9px; padding: 5px 0; font-size: 10px; border-bottom: 1px solid #7a9bb0; color: #31567d; }
+.meal-copy-link:hover { color: #113d6c; border-color: #113d6c; }
+.journey-memory { --memory-opacity: 0; --memory-y: 0px; position: absolute; inset: 0; z-index: 2; opacity: var(--memory-opacity); pointer-events: none; }
+.journey-memory figure { position: absolute; margin: 0; background: #fff; padding: 8px 8px 12px; width: clamp(160px,19vw,290px); box-shadow: 0 14px 30px #283f5b13; }
+.journey-memory .memory-left { left: 4.5%; top: 25%; transform: translateY(var(--memory-y)) rotate(-7deg); }
+.journey-memory .memory-right { right: 4.5%; bottom: 13%; transform: translateY(calc(var(--memory-y) * .8)) rotate(7deg); }
+.journey-memory img { display: block; width: 100%; aspect-ratio: 1.15; height: auto; object-fit: cover; user-select: none; }
+/* Source photos stay intact; these focal points crop away their supplied white borders. */
+.journey-memory .photo-breakfast-plate img,.journey-memory .photo-breakfast-table img { object-position: center 40%; }
+.journey-memory .photo-lunch-wide img { object-position: center 41%; }
+.journey-memory .photo-lunch-detail img { object-position: 58% 42%; }
+.journey-memory .photo-dinner-beef img,.journey-memory .photo-dinner-chop img { object-position: center 40%; }
+.journey-memory figcaption { padding: 12px 7px 1px; font-size: 10px; color: #4f6e8d; }
+.journey-memory figcaption span { display: block; }
+.journey-memory figcaption small { display: block; font-size: 8px; color: #8494a8; margin-top: 4px; }
+.journey-controls { position: absolute; left: 50%; bottom: 3.5%; z-index: 7; transform: translateX(-50%); width: min(355px,75vw); display: grid; grid-template-columns: 38px 1fr 30px; align-items: center; column-gap: 15px; opacity: var(--controls-opacity); }
+.journey-counter { font-size: 10px; display: flex; gap: 5px; color: #6481a0; white-space: nowrap; }
+#journey-current { color: #244f79; }
+.journey-meal-buttons { display: flex; gap: 3px; justify-content: center; }
+.journey-meal-buttons button { border: 0; padding: 9px 13px; border-radius: 50px; background: transparent; font-size: 12px; color: #607b97; transition: background .2s,color .2s; }
+.journey-meal-buttons button[aria-pressed="true"] { color: #fff; background: #305f8b; }
+.journey-next { padding: 0; width: 29px; height: 29px; display: grid; place-items: center; border: 1px solid #7392ad; border-radius: 50%; background: transparent; color: #335f82; }
+.journey-next:hover { background: #305f8b; color: #fff; }
+.journey-progress { grid-column: 1/-1; height: 1px; background: #b5c8d9; margin-top: 9px; }
+.journey-progress-fill { display: block; width: 100%; height: 1px; background: #335f8b; transform-origin: left; transform: scaleX(var(--progress)); }
+.journey-margin-note { position: absolute; z-index: 6; left: 4.5%; bottom: 30px; font-size: 11px; color: #69839e; line-height: 1.85; opacity: var(--heading-opacity); margin: 0; pointer-events: none; }
+.journey-noscript { text-align: center; padding: 40px; }
+.kitchen-entry { position: relative; overflow: hidden; background: #f9fbfd; color: #2d5274; padding: 120px 0 128px; }
+.kitchen-entry-copy { width: min(520px,84%); margin: 0 auto 42px; text-align: center; }
+.kitchen-entry-copy>span,.kitchen-steps-head { font-size: 11px; color: #66829c; }
+.kitchen-entry-copy h2 { font: 400 clamp(36px,4.3vw,66px)/1.15 "Songti SC", "SimSun", Georgia, serif; letter-spacing: -.07em; margin: 17px 0; }
+.kitchen-entry-copy>p { font-size: 13px; line-height: 2; color: #6a839a; margin: 0; }
+.fridge-delivery { position: relative; display:block; width: min(510px,86vw); height: min(535px,86vw); margin: 0 auto 80px; overflow: hidden; background: #dce8ef; box-shadow: 0 23px 45px #335e7817; isolation:isolate; }
+.fridge-delivery:after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,#dceaf133,transparent 50%,#315b791a); transition:opacity .5s; }
+.fridge-delivery img { width:100%; height:100%; display:block; object-fit:cover; object-position:center 56%; transition:transform .75s cubic-bezier(.2,.78,.22,1),filter .5s; }
+.fridge-delivery-note { position:absolute; z-index:2; left:50%; top:53%; transform:translate(-50%,-50%) rotate(-3deg); width:48%; min-height:31%; display:grid; place-content:center; text-align:center; background:#f7ebd6e8; color:#a15f55; box-shadow:0 10px 22px #25394b20; transition:transform .45s cubic-bezier(.2,.78,.22,1),opacity .3s; }
+.fridge-delivery-note b { font:400 clamp(25px,4.5vw,45px)/1 "Bradley Hand","Comic Sans MS",cursive; letter-spacing:.02em; }.fridge-delivery-note small { color:#52758b; font-size:10px; margin-top:13px; letter-spacing:.08em; }
+.fridge-delivery-handle { position:absolute; z-index:2; left:50%; bottom:21px; transform:translateX(-50%); width:1px; height:36px; background:#e5f2f8; box-shadow:0 0 0 5px #315d781c; opacity:.8; }
+.fridge-delivery:hover img,.fridge-delivery:focus-visible img { transform:scale(1.055); filter:saturate(1.08); }.fridge-delivery:hover .fridge-delivery-note,.fridge-delivery:focus-visible .fridge-delivery-note { transform:translate(-50%,-53%) rotate(1deg) scale(1.04); }
+.fridge-delivery.is-opening img { transform:scale(1.13); filter:brightness(1.2); }.fridge-delivery.is-opening .fridge-delivery-note { transform:translate(-50%,-76%) rotate(6deg) scale(.7); opacity:0; }.fridge-delivery.is-opening:after { opacity:0; }
+.kitchen-steps-head { display:flex; align-items:center; justify-content:space-between; gap:20px; margin:0 8% 19px; }.kitchen-steps-head p { margin:0; font:400 clamp(24px,2.5vw,40px)/1.2 "Songti SC","SimSun",Georgia,serif; color:#315b7b; letter-spacing:-.05em; }.kitchen-steps-head span { font-size:10px; }
+.kitchen-steps { display:flex; gap:24px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:grab; padding:0 8% 13px; }.kitchen-steps::-webkit-scrollbar{display:none}.kitchen-steps.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.kitchen-step { flex:0 0 min(43vw,570px); display:grid; grid-template-rows:minmax(240px,29vw) auto; background:#fff; border:1px solid #d9e3ea; color:#315b7b; scroll-snap-align:start; transition:transform .28s ease,box-shadow .28s ease; }.kitchen-step:hover,.kitchen-step:focus-visible { transform:translateY(-7px); box-shadow:0 18px 35px #345e7b16; }.kitchen-step img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.75) contrast(.95); }.kitchen-step>div { min-height:194px; box-sizing:border-box; padding:26px 29px; display:flex; flex-direction:column; }.kitchen-step span { font-size:9px; letter-spacing:.14em; color:#7696aa; }.kitchen-step h3 { margin:18px 0 10px; font:400 clamp(23px,2.4vw,38px)/1.05 "Songti SC","SimSun",Georgia,serif; letter-spacing:-.06em; }.kitchen-step p { margin:auto 0 0; padding-top:17px; border-top:1px solid #d9e3ea; color:#6d8799; font-size:11px; line-height:1.7; }
+.journey-stage a:focus-visible,.journey-stage button:focus-visible,.kitchen-entry a:focus-visible { outline: 2px solid #2a5e93; outline-offset: 6px; }
+@media (min-width: 1700px) { .journey-bowl { width: min(61vw,1050px); } }
+@media (max-height: 690px) and (min-width: 761px) {
+  .journey-intro { top: 92px; }
+  .journey-intro h1 { font-size: 61px; }
+  .journey-intro-desc { margin: 14px 0; }
+  .journey-bowl { width: min(60vw,720px); top: 36svh; }
+  .journey-plate { width: min(79svh,61vw); }
+  .journey-meal-copy p { margin: 12px -10px; }
+}
+@media (max-width: 980px) and (min-width: 761px) { .journey-memory figure { width: 180px; } .journey-memory .memory-left { left: -3%; } .journey-memory .memory-right { right: -3%; } }
+@media (max-width: 760px) {
+  .site-header { padding: 16px 5% 0; min-height: 104px; height: auto; }
+  .site-header .brand { font-size: 22px; }
+  .site-header nav { gap: 21px; height: 36px; }
+  .site-header nav a { font-size: 11px; padding-bottom: 8px; }
+  .site-header nav a.active:after { bottom: 1px; }
+  .meal-journey.is-enhanced { height: 440svh; }
+  .journey-intro { top: max(140px,18svh); }
+  .journey-intro-note { font-size: 10px; margin-bottom: 18px; }
+  .journey-intro h1 { font-size: clamp(38px,10.8vw,64px); line-height: 1.2; }
+  .journey-intro-desc { font-size: 11px; margin: 20px 0 17px; }
+  .mobile-break { display: initial; }
+  .journey-start-link { font-size: 10px; padding: 9px 16px; }
+  .journey-bowl { width: 116vw; top: 43svh; }
+  .journey-motion { right: 6%; bottom: 14px; font-size: 8px; }
+  .journey-plate { width: min(96vw,70svh); top: 51%; }
+  .journey-meal-copy { inset: 25% 19% 22%; }
+  .journey-meal-copy h2 { font-size: clamp(35px,11vw,60px); margin-bottom: 5px; }
+  .meal-hour { font-size: 8px; margin-bottom: 6px; }
+  .meal-english { font-size: clamp(15px,4.5vw,21px); }
+  .journey-meal-copy p { font-size: 10px; margin: 11px -5px; line-height: 1.85; }
+  .meal-copy-link { font-size: 9px; }
+  .journey-heading { top: 30px; left: 6%; right: 6%; font-size: 9px; }
+  .journey-heading span:last-child { display: none; }
+  .journey-memory figure { width: 125px; padding: 5px 5px 8px; }
+  .journey-memory .memory-left { top: 9%; left: -3%; }
+  .journey-memory .memory-right { bottom: 14%; right: -5%; }
+  .journey-memory img { aspect-ratio: 1.25; }
+  .journey-memory figcaption { padding: 6px 3px 0; font-size: 8px; }
+  .journey-memory figcaption span { display: none; }
+  .journey-memory figcaption small { font-size: 7px; }
+  .journey-margin-note { display: none; }
+  .journey-controls { bottom: 4%; width: min(340px,84vw); column-gap: 9px; }
+  .journey-meal-buttons button { font-size: 11px; padding: 9px 11px; min-height: 44px; }
+  .kitchen-entry { padding:78px 0 83px; }.kitchen-entry-copy { margin-bottom:31px; }.fridge-delivery { margin-bottom:57px; }.kitchen-steps-head { margin:0 7% 16px; }.kitchen-steps-head p { font-size:27px; }.kitchen-steps-head span{display:none}.kitchen-steps { gap:15px; padding-left:7%; padding-right:7%; }.kitchen-step { flex-basis:81vw; grid-template-rows:55vw auto; }.kitchen-step>div{min-height:175px;padding:21px}.kitchen-step h3{font-size:29px;margin:14px 0 9px}
+}
+@media (max-height: 540px) {
+  .journey-intro { top: 87px; }
+  .journey-intro h1 { font-size: 35px; line-height: 1.1; }
+  .journey-intro-note { font-size: 9px; margin-bottom: 8px; }
+  .journey-intro-desc { font-size: 10px; margin: 10px 0; }
+  .journey-start-link { font-size: 9px; padding: 6px 14px; }
+  .journey-bowl { width: min(60vw,510px); top: 34svh; }
+  .journey-plate { width: min(79svh,70vw); top: 47%; }
+  .journey-meal-copy h2 { font-size: 34px; margin-bottom: 3px; }
+  .meal-hour { font-size: 7px; margin-bottom: 4px; }
+  .meal-english { font-size: 15px; }
+  .journey-meal-copy p { font-size: 9px; margin: 8px -5px; }
+  .meal-copy-link { font-size: 8px; }
+  .journey-controls { bottom: 3%; }
+  .journey-heading { top: 14px; }
+  .journey-margin-note,.journey-motion { bottom: 13px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .meal-journey.is-enhanced { height: 180svh; }
+  .journey-plate-art { transform: none; }
+  .journey-bowl,.journey-intro,.journey-memory { transition: none; }
+}
+.is-reduced .journey-plate-art { transform: none; }
+.meal-journey.is-reduced .mountain-layer,.meal-journey.is-reduced .journey-mist-reference { animation: none; }
+@media (prefers-reduced-motion: reduce) { .mountain-layer,.journey-mist-reference { animation: none; } }
+
+/* Editorial blue-print hero: the supplied floral cyanotype replaces the old bowl scene. */
+.home-page .journey-stage { background: #0b3974 url("assets--meal-journey--blueprint-floral-hero.webp") center 42% / cover no-repeat; isolation: isolate; }
+.home-page .journey-stage:before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(4,35,82,.22), rgba(18,80,134,.08) 55%, rgba(4,35,82,.26)); pointer-events: none; }
+.home-page .journey-stage:after { display: none; }
+.home-page .journey-intro { top: clamp(116px, 13svh, 168px); z-index: 6; opacity: var(--intro-opacity); }
+.home-page .journey-intro h1 { width: min(74vw, 790px); margin: 0 auto; color: #fff; letter-spacing: 0; }
+.home-page .journey-intro h1 svg { display: block; width: 100%; height: auto; overflow: visible; }
+.home-page .journey-intro h1 text { fill: #f7fbff; font: 400 58px/1 "Songti SC", "SimSun", Georgia, serif; letter-spacing: .06em; paint-order: stroke; stroke: rgba(11,50,100,.28); stroke-width: 1px; }
+.home-page .journey-scroll-start,.home-page .journey-margin-note,.home-page .journey-skip { display: none; }
+.home-page .journey-plate,.home-page .journey-memory { z-index: 2; }
+.home-page .journey-controls { z-index: 8; }
+.site-header .brand-mark { display: none; }
+@media (max-width: 760px) {
+  .home-page .journey-stage { background-position: 50% 38%; }
+  .home-page .journey-intro { top: max(106px, 15svh); }
+  .home-page .journey-intro h1 { width: 110vw; margin-left: -5vw; }
+  .home-page .journey-intro h1 text { font-size: 46px; letter-spacing: .035em; }
+}
+
+/* The bowl is the foreground object; the supplied cyanotype stays quiet behind it. */
+.home-page .journey-stage{background:#0b376f;isolation:isolate}
+.home-page .journey-stage:before{z-index:0;background:linear-gradient(90deg,rgba(5,35,79,.46),rgba(11,67,122,.16) 52%,rgba(4,29,69,.5)),url("assets--meal-journey--blueprint-floral-hero.webp") center 42%/cover no-repeat;opacity:.68}
+.home-page .journey-bowl{display:block;z-index:5;top:clamp(270px,42svh,430px);width:min(56vw,760px);opacity:var(--bowl-opacity);filter:drop-shadow(0 24px 34px #061d4c75)}
+.home-page .journey-bowl img{filter:none}
+.home-page .journey-intro{z-index:6;top:clamp(96px,10svh,138px)}
+.home-page .journey-intro h1{width:min(67vw,690px)}
+.home-page .journey-intro h1 text{font-size:53px;letter-spacing:.075em;stroke:rgba(2,26,70,.48);stroke-width:1.3px}
+.home-page .journey-plate,.home-page .journey-memory{z-index:2}
+.site-header{color:#fff;background:linear-gradient(180deg,#082b5d9c,transparent)}
+.site-header .brand,.site-header .brand-en{color:#fff;text-shadow:0 1px 16px #061d467d}
+.site-header .brand-mark{display:none}
+@media (max-width:760px){.home-page .journey-stage:before{background-position:50% 38%;opacity:.62}.home-page .journey-bowl{width:112vw;top:43svh}.home-page .journey-intro{top:max(83px,11svh)}.home-page .journey-intro h1{width:112vw;margin-left:-6vw}.home-page .journey-intro h1 text{font-size:43px}}

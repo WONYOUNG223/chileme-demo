@@ -1,0 +1,63 @@
+/* Shared readable surfaces and compact pantry controls. */
+#ingredients #condiment-panel{padding:16px 20px}
+#condiment-panel>summary{cursor:pointer;min-height:44px;line-height:1.7;color:#18334d;font-weight:600}
+#condiment-summary{display:block;color:#43566b;font-size:13px;font-weight:400}
+#ingredients .inventory-surface>#generate-plan{margin-top:20px;min-height:52px;background:#174b79;color:white;border:1px solid #174b79}
+#ingredients .surface,#ingredients .kitchen-card,#ingredients .tip-card{background:#fff;color:#18334d}
+#ingredients .surface h2,#ingredients .kitchen-card summary,#ingredients label,#ingredients .quick-label{color:#18334d}
+#ingredients .surface p,#ingredients .surface-title>span,#ingredients .catalog-summary,#ingredients .catalog summary,#ingredients .storage-note,#ingredients .kitchen-card p{color:#43566b}
+#ingredients .condiment-panel{background:#fff}
+.flow-panel{background:#fff;color:#18334d;border:1px solid #bccbd8;border-radius:18px;padding:22px;margin:20px 0}
+.flow-panel>summary{font-weight:650;cursor:pointer;min-height:44px;padding:8px 0}
+.flow-panel p,.flow-panel li{color:#43566b;line-height:1.8}
+.flow-shortage{border-top:1px solid #dce4eb;padding:16px 0}.flow-shortage strong{color:#18334d;font-size:17px}
+.flow-shortage p{font-size:13px;margin:5px 0 12px}
+.flow-actions{display:flex;gap:10px;flex-wrap:wrap}
+.flow-actions button,.purchase-recipe button,.cook-choice,#cook-stop,#cook-enable-notifications{border:1px solid #9aafc3;border-radius:12px;background:#fff;color:#18334d;padding:12px 16px;min-height:46px;font:inherit;cursor:pointer}
+.flow-actions button:disabled{opacity:1;color:#536579;background:#e8edf2}
+.purchase-recipe{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.flow-resume:not(:empty){padding:14px;border-radius:12px;background:#e7f3f0;color:#184d41}
+#purchase-panel{scroll-margin-top:90px}
+#cooking{--cook-bg:#edf3fa;--cook-accent:#174b79;background:var(--cook-bg);color:#18334d;min-height:100dvh;max-width:none}
+#cooking[data-taste=spicy]{--cook-bg:#fff0e8;--cook-accent:#923c25}
+#cooking[data-taste=sweet]{--cook-bg:#fff7df;--cook-accent:#785016}
+#cooking[data-taste=light]{--cook-bg:#edf5e9;--cook-accent:#35603b}
+#cooking[data-taste=fresh]{--cook-bg:#e5f5f5;--cook-accent:#216064}
+#cooking[data-taste=rich]{--cook-bg:#f5ebe4;--cook-accent:#704732}
+.cook-header,.cook-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;max-width:1000px;margin:auto}
+.cook-header{font-size:13px;color:#43566b}.cook-heading h1{font-size:clamp(30px,5vw,48px);line-height:1.3;color:#18334d}
+.cook-heading select{display:block;margin-top:8px;padding:10px;min-height:44px;font-size:16px;color:#18334d;border:1px solid #9aafc3;border-radius:10px;background:#fff}
+#cooking>.flow-panel{max-width:1000px;margin:24px auto}
+#cooking .cook-step-label{font-weight:650;color:var(--cook-accent);font-size:20px}
+.cook-clock{font-variant-numeric:tabular-nums;font-size:clamp(54px,12vw,92px);font-weight:700;letter-spacing:-.04em;line-height:1.25;color:var(--cook-accent)}
+#cooking .cook-instruction{font-size:20px;line-height:1.9;color:#18334d}
+#cooking .cook-warning{font-size:13px;padding:12px;background:#fff6e4;color:#6a431b;border-radius:10px}
+#cooking .flow-primary{background:var(--cook-accent);color:#fff;border-color:var(--cook-accent)}
+#cook-alert:not(:empty){padding:14px;background:#fff3dc;color:#70400e;border:1px solid #d8b26c;border-radius:10px}
+.cook-notifications{border-top:1px solid #dce4eb;padding-top:16px;margin-top:20px}
+.cook-choice{display:block;width:100%;margin:12px 0;text-align:left}
+#cooking a:focus-visible,#cooking button:focus-visible,.flow-panel button:focus-visible{outline:3px solid #bd6b17;outline-offset:3px}
+#recipe-dialog .flow-panel h3,#recipe-dialog .flow-panel strong{color:#18334d}
+@media(max-width:600px){.flow-panel{padding:16px}.flow-actions{display:grid;grid-template-columns:1fr;width:100%}.flow-actions button{width:100%}.cook-heading{align-items:flex-start}.cook-heading label{width:100%}.cook-heading select{width:100%}#cooking .cook-instruction{font-size:18px}.cook-header{align-items:flex-start}#cooking{padding-top:100px}}
+/* Meal review: explicit control sizes prevent global input styles squeezing labels. */
+.meal-review-dialog{background:#fbfaf6;color:#243b38;padding:24px;box-sizing:border-box;width:min(620px,calc(100% - 24px))}
+.review-header{padding:6px 0 2px}.review-eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;color:#527064}
+.meal-review-dialog h2{font-size:26px;line-height:1.35;margin:10px 0}
+.meal-review-dialog .fridge-note{line-height:1.65;font-size:13px;color:#566861}
+.meal-review-dialog fieldset{min-width:0;border:0;border-top:1px solid #dbe3dc;border-radius:0;padding:18px 0 4px;margin:22px 0 10px}
+.meal-review-dialog legend{font-size:15px;font-weight:700;padding:0 10px 0 0;color:#29463b}
+.meal-review-dialog fieldset label.review-choice{display:inline-flex;box-sizing:border-box;max-width:100%;width:auto;min-height:46px;padding:10px 13px;margin:5px 6px 5px 0;gap:9px;background:#fff;border:1px solid #cbd7cf;border-radius:13px;font-size:15px;line-height:1.4;cursor:pointer;vertical-align:top}
+.meal-review-dialog .review-choice input[type=checkbox],.meal-review-dialog .review-choice input[type=radio]{appearance:auto;display:inline-block;position:static;flex:0 0 18px;width:18px!important;height:18px!important;min-width:18px;min-height:18px;padding:0;margin:0;accent-color:#34654b}
+.meal-review-dialog .review-choice span{flex:1 1 auto;min-width:0;white-space:normal;word-break:normal;overflow-wrap:break-word}
+.meal-review-dialog .review-choice:has(input:checked){background:#e5f1e7;border-color:#427052;color:#214e35;box-shadow:0 0 0 1px #427052}
+.meal-review-dialog .review-choice:focus-within{outline:3px solid #bd8d39;outline-offset:3px}
+.meal-review-dialog .fridge-amounts{background:#edf1e9;color:#3b5146;font-size:13px;line-height:1.8;margin:12px 0}
+.meal-review-dialog input[type=file]{background:#fff;border:1px dashed #a8bcae;padding:12px}
+.meal-review-dialog input[type=file]::file-selector-button{border:0;border-radius:8px;padding:9px 12px;background:#e5efe6;color:#294e38;margin-right:10px}
+.meal-review-dialog textarea{background:#fff;color:#233c32}
+.meal-review-dialog .fridge-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+.meal-review-dialog .fridge-actions .primary{background:#34654b;color:white;border-color:#34654b}
+.scroll-to-top{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));right:20px;z-index:90;width:48px;height:48px;min-height:48px;border:1px solid #c4d3ca;border-radius:50%;background:#fff;color:#294f3b;box-shadow:0 4px 18px #203c5426;font-size:24px;cursor:pointer;touch-action:manipulation}
+.scroll-to-top[hidden]{display:none!important}
+dialog .scroll-to-top{position:fixed;top:calc(6dvh + 12px);bottom:auto;right:max(32px,calc((100vw - 620px)/2 + 24px));margin:0;z-index:20;width:44px;height:44px;min-height:44px}
+@media(max-width:480px){.meal-review-dialog{padding:20px 16px}.meal-review-dialog h2{font-size:24px}.meal-review-dialog fieldset label.review-choice{padding:10px 11px;margin-right:5px;font-size:14px}}

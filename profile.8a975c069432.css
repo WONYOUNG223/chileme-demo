@@ -1,0 +1,13 @@
+/* Account view: a personal kitchen page, not a settings-only form. */
+.profile-summary{align-items:flex-start;padding:24px 0}
+.profile-summary .member-avatar{width:82px;height:82px;font-size:34px;border:3px solid #d7e7f2;box-shadow:0 8px 20px #0b4f8324}
+.profile-identity{min-width:0}
+.profile-identity>p:first-child{margin:0 0 5px;color:#537890;font-size:10px;letter-spacing:.08em}
+.profile-identity h3{margin:0;color:var(--ink);font:400 27px/1.15 "Songti SC",serif;overflow-wrap:anywhere}
+.profile-identity>span{display:block;margin-top:7px;color:var(--muted);font-size:11px;overflow-wrap:anywhere}
+.profile-bio-display{margin:9px 0 0;color:#3d647e;font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.avatar-upload{padding:15px;border:1px dashed #91b5ce!important;background:#eef6fb}
+.avatar-upload input{padding:0!important;border:0!important;background:transparent!important;font-size:12px!important}
+.avatar-upload>span{color:#315d7b;font-size:12px}
+.avatar-upload small{line-height:1.65}
+@media(max-width:480px){.profile-summary{gap:14px}.profile-summary .member-avatar{width:68px;height:68px}.profile-identity h3{font-size:23px}}
